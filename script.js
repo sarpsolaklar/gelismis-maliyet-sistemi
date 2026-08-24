@@ -642,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elClsFinansman = document.getElementById(`cls-finansman-${cIndex}`);
                 if (elClsFinansman) {
                     elClsFinansman.textContent = formatCurrency(clsFinansman);
-                    elClsFinansman.style.color = clsFinansman < 0 ? "var(--success)" : "var(--accent-1)";
+                    elClsFinansman.style.color = clsFinansman < 0 ? "var(--success)" : "var(--danger)";
                 }
                 const elClsFaaliyet = document.getElementById(`cls-faaliyet-${cIndex}`);
                 if (elClsFaaliyet) elClsFaaliyet.textContent = formatCurrency(clsPazarlama + clsYonetim + clsArge);
@@ -684,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elUnitFinansman = document.getElementById(`cls-unit-finansman-${cIndex}`);
                 if (elUnitFinansman) {
                     elUnitFinansman.textContent = formatCurrency(clsUnitFinansman);
-                    elUnitFinansman.style.color = clsUnitFinansman < 0 ? "var(--success)" : "var(--accent-1)";
+                    elUnitFinansman.style.color = clsUnitFinansman < 0 ? "var(--success)" : "var(--danger)";
                 }
                 const elUnitFaaliyet = document.getElementById(`cls-unit-faaliyet-${cIndex}`);
                 if (elUnitFaaliyet) elUnitFaaliyet.textContent = formatCurrency(clsUnitPazarlama + clsUnitYonetim + clsUnitArge);
@@ -799,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Şube Finansman (Gelir/Gider) Payı:</span>
-                        <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--accent-1)'};">${formatCurrency(branch.branchFinansman || 0)}</span>
+                        <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchFinansman || 0)}</span>
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam Faaliyet Gideri:</span>
@@ -978,7 +978,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Sınıf Finansman (Gelir/Gider) Payı:</span>
-                        <span id="cls-finansman-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
+                        <span id="cls-finansman-${cIndex}" style="color: var(--danger);">0 ₺</span>
                     </div>
                     <div class="result-row">
                         <span>Sınıf Toplam Faaliyet Gideri:</span>
@@ -1031,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Finansman (Gelir/Gider) Payı:</span>
-                        <span id="cls-unit-finansman-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
+                        <span id="cls-unit-finansman-${cIndex}" style="color: var(--danger);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Toplam Faaliyet Gideri:</span>
