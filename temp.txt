@@ -1,0 +1,22 @@
+'t ask for permission.
+[diff_block_start]
+@@ -77,8 +77,14 @@
+                 <div class="side-panel">
+                     <div class="glass-card shared-expense-card accent-border">
+                         <h2>Şube Eşit Gider Payı</h2>
+-                        <p class="help-text">Bu tutar ana ekrandan otomatik hesaplanmıştır ve alt sınıflara dağıtılacaktır.</p>
+-                        <div class="big-value" id="detailSharedExpense">0 ₺</div>
++                        <p class="help-text">Bu tutar ana ekrandan otomatik hesaplanmıştır.</p>
++                        <div class="big-value" id="detailSharedExpense" style="font-size: 2rem;">0 ₺</div>
++                    </div>
++
++                    <div class="glass-card shared-expense-card accent-border" style="border-color: var(--accent-1);">
++                        <h2>Şube İşçilik Maliyeti</h2>
++                        <p class="help-text">Ana ekranda girilen işçilik maliyeti.</p>
++                        <div class="big-value" id="detailLaborExpense" style="font-size: 2rem; color: var(--accent-1);">0 ₺</div>
+                     </div>
+ 
+                     <div class="glass-card results-card">
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

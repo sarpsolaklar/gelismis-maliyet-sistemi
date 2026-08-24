@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelişmiş Şube Maliyet Hesaplayıcı</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=27">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js?v=46" defer></script>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <div class="top-actions no-print">
+            <button id="btnThemeToggle" class="icon-btn" title="Gündüz/Gece Modu">
+                <svg id="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <button id="btnImportExcel" class="icon-btn" title="Excel'den İçe Aktar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </button>
+            <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display: none;">
+            <button id="btnExcel" class="icon-btn" title="Excel'e Aktar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="16" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </button>
+            <button id="btnPrint" class="icon-btn" title="Yazdır / PDF Olarak Kaydet">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            </button>
+        </div>
+        
+        <div id="main-view" class="view active">
+            <header>
+                <div class="header-left">
+                    <img src="logo.png" alt="Celmak Logo" class="logo" style="width: 140px; height: auto;" onerror="this.style.display='none'">
+                    <div class="title-area">
+                        <h1>Gelişmiş Şube Maliyet Sistemi</h1>
+                        <p class="subtitle">Bölge, Şube ve Makine Sınıfı Maliyetleri</p>
+                    </div>
+                </div>
+                <div class="header-right no-print">
+                    <div class="scenario-controls">
+                        <select id="scenarioSelector" class="scenario-select"></select>
+                        <button id="btnNewScenario" class="btn-scenario-add" title="Yeni Boş Senaryo Oluştur">+</button>
+                        <button id="btnDeleteScenario" class="btn-scenario-del" title="Mevcut Senaryoyu Sil">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                        <button id="btnCompareScenarios" class="btn-scenario-add" style="background: var(--accent-1); margin-left: 1rem;" title="Senaryoları Kıyasla">Kıyasla</button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <div id="mainBranchesContainer" class="branches-grid">
+                    <div class="glass-card add-card no-print" id="btnAddBranch">
+                        <div class="add-icon">+</div>
+                        <h3>Yeni Şube Ekle</h3>
+                    </div>
+                </div>
+
+                <div class="side-panel">
+                    <div class="glass-card shared-expense-card no-print">
+                        <div class="input-group">
+                            <label for="sharedExpense">Eşit Dağıtılan İşçilik (₺)</label>
+                            <input type="number" id="sharedExpense" value="720" min="0">
+                        </div>
+                        <div class="input-group" style="margin-top: 1rem;">
+                            <label for="globalGUG">Genel Üretim Gideri (GÜG) (₺)</label>
+                            <input type="number" id="globalGUG" value="0" min="0">
+                        </div>
+                        <div class="input-group" style="margin-top: 1rem;">
+                            <label for="globalPazarlama">Pazarlama Gideri (₺)</label>
+                            <input type="number" id="globalPazarlama" value="0" min="0">
+                        </div>
+                        <div class="input-group" style="margin-top: 1rem;">
+                            <label for="globalYonetim">Genel Yönetim Gideri (₺)</label>
+                            <input type="number" id="globalYonetim" value="0" min="0">
+                        </div>
+                        <div class="input-group" style="margin-top: 1rem;">
+                            <label for="globalArge">Arge Gideri (₺)</label>
+                            <input type="number" id="globalArge" value="0" min="0">
+                        </div>
+                        <div class="input-group" style="margin-top: 1rem;">
+                            <label for="global-finansman">Finansman (Gelir/Gider) (₺)</label>
+                            <input type="number" id="global-finansman" value="0">
+                        </div>
+                    </div>
+
+                    <div class="glass-card chart-card">
+                        <h2>Maliyet Dağılımı</h2>
+                        <div class="chart-wrapper">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="glass-card results-card">
+                        <h2>Genel Toplamlar</h2>
+                        <div class="dashboard-grid">
+                            <div class="metric-widget">
+                                <div class="metric-icon" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                </div>
+                                <span class="metric-title">Tüm Makine Sayısı</span>
+                                <span class="metric-value" id="totalMachineCount">0 Adet</span>
+                            </div>
+                            
+                            <div class="metric-widget">
+                                <div class="metric-icon" style="background: rgba(244, 63, 94, 0.2); color: #f43f5e;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                </div>
+                                <span class="metric-title">Sistem Toplam Maliyeti (₺)</span>
+                                <span class="metric-value grand-total" id="globalNetCost">0 ₺</span>
+                            </div>
+                            
+                            <div class="metric-widget" style="grid-column: span 2;">
+                                <div class="metric-icon" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                </div>
+                                <span class="metric-title">Sistem Toplam Brüt Kârı (₺)</span>
+                                <span class="metric-value grand-total" id="globalNetProfit" style="color: var(--success);">0 ₺</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="detail-view" class="view">
+            <header>
+                <div class="header-left">
+                    <button id="btnBackToMain" class="icon-btn back-btn" title="Geri Dön">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </button>
+                    <div class="title-area">
+                        <h1 id="detailBranchName">Şube Detayı</h1>
+                        <p class="subtitle">Makine Sınıfları ve Kârlılık</p>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="main-content">
+                <div id="detailClassesContainer" class="classes-grid">
+                    <div class="glass-card add-card" id="btnAddClass">
+                        <div class="add-icon">+</div>
+                        <p>Yeni Sınıf Ekle</p>
+                    </div>
+                </div>
+                <div class="side-panel" id="detailSidePanel">
+                    <div class="glass-card shared-expense-card accent-border">
+                        <h2>Şube Eşit Gider Payı</h2>
+                        <p class="help-text">Bu tutar ana ekrandan otomatik hesaplanmıştır.</p>
+                        <div class="big-value" id="detailSharedExpense" style="font-size: 2rem;">0 ₺</div>
+                    </div>
+
+                    <div class="glass-card shared-expense-card accent-border" style="border-color: var(--accent-1);">
+                        <h2>Şube İşçilik Maliyeti</h2>
+                        <p class="help-text">Ana ekranda girilen işçilik maliyeti.</p>
+                        <div class="big-value" id="detailLaborExpense" style="font-size: 2rem; color: var(--accent-1);">0 ₺</div>
+                    </div>
+
+                    <div class="glass-card results-card">
+                        <h2>Toplamlar</h2>
+                        <div class="result-row">
+                            <span>Sınıflar Toplam Hammadde:</span>
+                            <span id="detailTotalBaseUnits" style="font-weight: 600;">0 ₺</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Dağıtım Çarpanı:</span>
+                            <span id="detailDistributionMultiplier" style="font-weight: 600;">0.0000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="comparison-view" class="view">
+        <header>
+            <div class="header-left">
+                <button id="btnBackFromCompare" class="icon-btn back-btn" title="Geri Dön">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </button>
+                <div class="title-area">
+                    <h1>Senaryo Karşılaştırma</h1>
+                    <p class="subtitle">A/B Analizi ve Kârlılık Kıyaslaması</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="comparison-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+            <div class="glass-card" style="padding: 2rem;">
+                <h2 style="margin-bottom: 1rem; color: var(--accent-1);">Senaryo A</h2>
+                <select id="compareSelectA" class="class-input" style="width: 100%; margin-bottom: 2rem;"></select>
+                <div id="compareResultsA"></div>
+            </div>
+            
+            <div class="glass-card" style="padding: 2rem;">
+                <h2 style="margin-bottom: 1rem; color: var(--accent-2);">Senaryo B</h2>
+                <select id="compareSelectB" class="class-input" style="width: 100%; margin-bottom: 2rem;"></select>
+                <div id="compareResultsB"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
+

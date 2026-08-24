@@ -1,0 +1,32 @@
+al-${cIndex}`);
+             if(elBase) {
+-                elBase.textContent = cls.baseTotal.toFixed(2) + ' ₺';
+-                document.getElementById(`cls-share-${cIndex}`).textContent = clsShare.toFixed(2) + ' ₺';
+-                document.getElementById(`cls-labor-share-${cIndex}`).textContent = clsLaborShare.toFixed(2) + ' ₺';
+-                document.getElementById(`cls-net-${cIndex}`).textContent = clsNet.toFixed(2) + ' ₺';
+-                document.getElementById(`cls-unit-share-${cIndex}`).textContent = clsUnitShare.toFixed(2) + ' ₺';
+-                document.getElementById(`cls-unit-labor-share-${cIndex}`).textContent = clsUnitLaborShare.toFixed(2) + ' ₺';
+-                document.getElementById(`cls-unit-${cIndex}`).textContent = clsUnitCost.toFixed(2) + ' ₺';
+-            }
+-        });
+-
+-        detailSharedExpense.textContent = branchShare.toFixed(2) + ' ₺';
+-        document.getElementById('detailLaborExpense').textContent = branchLabor.toFixed(2) + ' ₺';
+-        detailTotalBaseUnits.textContent = detailBase.toFixed(2) + ' ₺';
++                elBase.textContent = formatCurrency(cls.baseTotal);
++                document.getElementById(`cls-share-${cIndex}`).textContent = formatCurrency(clsShare);
++                document.getElementById(`cls-labor-share-${cIndex}`).textContent = formatCurrency(clsLaborShare);
++                document.getElementById(`cls-net-${cIndex}`).textContent = formatCurrency(clsNet);
++                document.getElementById(`cls-unit-share-${cIndex}`).textContent = formatCurrency(clsUnitShare);
++                document.getElementById(`cls-unit-lab
+<truncated 436 bytes>
+etailBase);
+         detailDistributionMultiplier.textContent = detailMultiplier.toFixed(4);
+     }
+ 
+@@ -359,15 +359,15 @@
+                     </div>
+                     <div class="result-row">
+                         <span>Hammadde Toplamı:</span>
+-                        <span>${branch.branchBaseTotal.toFixed(2)} ₺</span>
++                        <

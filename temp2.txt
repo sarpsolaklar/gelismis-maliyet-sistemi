@@ -1,0 +1,22 @@
+quantity) : 0;
+             const clsUnitShare = cls.quantity > 0 ? (clsShare / cls.quantity) : 0;
+ 
+@@ -121,6 +121,7 @@
+             if(elBase) {
+                 elBase.textContent = cls.baseTotal.toFixed(2) + ' ₺';
+                 document.getElementById(`cls-share-${cIndex}`).textContent = clsShare.toFixed(2) + ' ₺';
++                document.getElementById(`cls-labor-share-${cIndex}`).textContent = clsLaborShare.toFixed(2) + ' ₺';
+                 document.getElementById(`cls-net-${cIndex}`).textContent = clsNet.toFixed(2) + ' ₺';
+                 document.getElementById(`cls-unit-share-${cIndex}`).textContent = clsUnitShare.toFixed(2) + ' ₺';
+                 document.getElementById(`cls-unit-${cIndex}`).textContent = clsUnitCost.toFixed(2) + ' ₺';
+@@ -128,6 +128,7 @@
+ 
+         // Update Detail UI
+         detailSharedExpense.textContent = branchShare.toFixed(2) + ' ₺';
++        document.getElementById('detailLaborExpense').textContent = branchLabor.toFixed(2) + ' ₺';
+         detailTotalBaseUnits.textContent = detailBase.toFixed(2) + ' ₺';
+         detailDistributionMultiplier.textContent = detailMultiplier.toFixed(4);
+     }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
