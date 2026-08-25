@@ -775,11 +775,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <div class="branch-results">
                     <div class="result-row">
-                        <span>İçerdiği Sınıf Sayısı:</span>
+                        <span>Şubenin İçerdiği Sınıf Sayısı:</span>
                         <span>${classCount} adet</span>
                     </div>
                     <div class="result-row">
-                        <span>Hammadde Toplamı:</span>
+                        <span>Şube Hammadde Toplamı:</span>
                         <span>${formatCurrency(branch.branchBaseTotal)}</span>
                     </div>
                     <div class="result-row">
@@ -962,7 +962,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="branch-results">
                     <div class="result-row">
-                        <span>Sınıf Hammadde Toplamı:</span>
+                        <span>Şube Hammadde Toplamı:</span>
                         <span id="cls-bTotal-${cIndex}">0 ₺</span>
                     </div>
                     <div class="result-row">
