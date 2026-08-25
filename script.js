@@ -181,12 +181,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         "Sınıf Toplam Genel Üretim Gideri Payı (₺)": clsGUG,
                         "Sınıf Pazarlama Gideri Payı (₺)": clsPazarlama,
                         "Sınıf Genel Yönetim Gideri Payı (₺)": cls.yonetim || 0,
-                        "Sınıf Arge Gideri Payı (₺)": cls.arge || 0,
+                        "Sınıf AR-GE Gideri Payı (₺)": cls.arge || 0,
                         "Sınıf Net Maliyeti (₺)": clsNet,
                         "1 Adet Makine İçin Genel Üretim Gideri Payı (₺)": cls.quantity > 0 ? (clsGUG / cls.quantity) : 0,
                         "1 Adet Makine İçin Pazarlama Gideri Payı (₺)": cls.quantity > 0 ? (clsPazarlama / cls.quantity) : 0,
                         "1 Adet Makine İçin Genel Yönetim Gideri Payı (₺)": cls.quantity > 0 ? ((cls.yonetim || 0) / cls.quantity) : 0,
-                        "1 Adet Makine İçin Arge Gideri Payı (₺)": cls.quantity > 0 ? ((cls.arge || 0) / cls.quantity) : 0,
+                        "1 Adet Makine İçin AR-GE Gideri Payı (₺)": cls.quantity > 0 ? ((cls.arge || 0) / cls.quantity) : 0,
                         "1 Adet Makine İçin Finansman (Gelir/Gider) Payı (₺)": cls.quantity > 0 ? ((cls.finansman || 0) / cls.quantity) : 0,
                         "1 Adet Makine Maliyeti (₺)": clsUnitCost,
                         "1 Adet Satış Fiyatı (₺)": cls.salePrice || 0,
@@ -799,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span style="color: var(--accent-1);">${formatCurrency(branch.branchYonetim)}</span>
                     </div>
                     <div class="result-row">
-                        <span>Şube Toplam Arge Gideri Payı:</span>
+                        <span>Şube Toplam AR-GE Gideri Payı:</span>
                         <span style="color: var(--accent-1);">${formatCurrency(branch.branchArge || 0)}</span>
                     </div>
                     <div class="result-row">
@@ -986,7 +986,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row">
-                        <span>Sınıf Arge Gideri Payı:</span>
+                        <span>Sınıf AR-GE Gideri Payı:</span>
                         <span id="cls-arge-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row">
@@ -1039,7 +1039,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-unit-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
-                        <span>1 Adet Makine İçin Arge Gideri Payı:</span>
+                        <span>1 Adet Makine İçin AR-GE Gideri Payı:</span>
                         <span id="cls-unit-arge-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
@@ -1292,7 +1292,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>GÜG:</strong> ${formatCurrency(gGug)}</p>
                 <p><strong>Pazarlama:</strong> ${formatCurrency(gPaz)}</p>
                 <p><strong>Genel Yönetim:</strong> ${formatCurrency(gYonetim)}</p>
-                <p><strong>Arge:</strong> ${formatCurrency(gArge)}</p>
+                <p><strong>AR-GE:</strong> ${formatCurrency(gArge)}</p>
                 <p><strong>Şube İşçilikleri:</strong> ${formatCurrency(globalLabor)}</p>
                 <p><strong>Hammadde Toplam:</strong> ${formatCurrency(globalBase)}</p>
             </div>
