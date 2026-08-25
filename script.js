@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>${formatCurrency(branch.branchBaseTotal)}</span>
                     </div>
                     <div class="result-row">
-                        <span>Eşit Dağıtılan İşçilik Payı:</span>
+                        <span>Şube Eşit Dağıtılan İşçilik Payı:</span>
                         <span style="color: var(--warning);">${formatCurrency(branch.branchShare)}</span>
                     </div>
                     <div class="result-row">
