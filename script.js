@@ -788,7 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam Genel Üretim Gideri Payı:</span>
-                        <span style="color: var(--accent-1);">${formatCurrency(branch.branchGUG)}</span>
+                        <span style="color: var(--accent-4);">${formatCurrency(branch.branchGUG)}</span>
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam Pazarlama Gideri Payı:</span>
@@ -975,7 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Sınıf Toplam Genel Üretim Gideri Payı:</span>
-                        <span id="cls-gug-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
+                        <span id="cls-gug-${cIndex}" style="color: var(--accent-4);">0 ₺</span>
                     </div>
                     <div class="result-row">
                         <span>Sınıf Pazarlama Gideri Payı:</span>
@@ -1028,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Genel Üretim Gideri Payı:</span>
-                        <span id="cls-unit-gug-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
+                        <span id="cls-unit-gug-${cIndex}" style="color: var(--accent-4);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Pazarlama Gideri Payı:</span>
