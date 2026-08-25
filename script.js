@@ -796,7 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam Genel Yönetim Gideri (GYG) Payı:</span>
-                        <span style="color: var(--danger);">${formatCurrency(branch.branchYonetim)}</span>
+                        <span style="color: var(--accent-1);">${formatCurrency(branch.branchYonetim)}</span>
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam AR-GE Gideri Payı:</span>
@@ -983,7 +983,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Sınıf Genel Yönetim Gideri (GYG) Payı:</span>
-                        <span id="cls-yonetim-${cIndex}" style="color: var(--danger);">0 ₺</span>
+                        <span id="cls-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row">
                         <span>Sınıf AR-GE Gideri Payı:</span>
@@ -1036,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Genel Yönetim Gideri (GYG) Payı:</span>
-                        <span id="cls-unit-yonetim-${cIndex}" style="color: var(--danger);">0 ₺</span>
+                        <span id="cls-unit-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin AR-GE Gideri Payı:</span>
