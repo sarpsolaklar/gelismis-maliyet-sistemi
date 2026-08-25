@@ -731,10 +731,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const textBranchShare = numberToTurkishText(branchShare);
-        detailSharedExpense.innerHTML = `${formatCurrency(branchShare)} <div class="pronunciation-text">(${textBranchShare})</div>`;
+        detailSharedExpense.innerHTML = `<span style="color: var(--warning);">${formatCurrency(branchShare)}</span> <div class="pronunciation-text">(${textBranchShare})</div>`;
         
         const textBranchLabor = numberToTurkishText(branchLabor);
-        document.getElementById('detailLaborExpense').innerHTML = `${formatCurrency(branchLabor)} <div class="pronunciation-text">(${textBranchLabor})</div>`;
+        document.getElementById('detailLaborExpense').innerHTML = `<span style="color: var(--warning);">${formatCurrency(branchLabor)}</span> <div class="pronunciation-text">(${textBranchLabor})</div>`;
         
         const textDetailBase = numberToTurkishText(detailBase);
         detailTotalBaseUnits.innerHTML = `${formatCurrency(detailBase)} <div class="pronunciation-text">(${textDetailBase})</div>`;
