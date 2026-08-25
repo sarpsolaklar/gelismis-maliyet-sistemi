@@ -763,6 +763,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input type="text" data-bindex="${bIndex}" class="branch-input name-input" value="${branch.name}">
                 </div>
                 
+                <div class="input-group">
+                    <label>Şube Çalışan Sayısı (Bilgi Amaçlı)</label>
+                    <input type="number" data-bindex="${bIndex}" class="branch-input emp-input" value="${branch.employees || ''}" min="0" placeholder="Örn: 5">
+                </div>
+                
                 <div class="input-group" style="margin-bottom: 1.5rem;">
                     <label>Şube İşçilik Maliyeti (₺)</label>
                     <input type="number" data-bindex="${bIndex}" class="branch-input labor-input" value="${branch.laborCost || ''}" min="0" placeholder="Örn: 10">
@@ -837,6 +842,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 branchData[bIndex].name = e.target.value;
                 saveData();
                 updateChart();
+            });
+        });
+
+        document.querySelectorAll('.branch-input.emp-input').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const bIndex = parseInt(e.target.getAttribute('data-bindex'));
+                branchData[bIndex].employees = parseFloat(e.target.value) || 0;
+                saveData();
             });
         });
 
