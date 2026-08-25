@@ -803,12 +803,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span style="color: var(--accent-1);">${formatCurrency(branch.branchArge || 0)}</span>
                     </div>
                     <div class="result-row">
+                        <span>Şube Toplam Faaliyet Gideri Payı:</span>
+                        <span style="color: var(--accent-2);">${formatCurrency((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))}</span>
+                    </div>
+                      <div class="result-row">
                         <span>Şube Finansman (Gelir/Gider) Payı:</span>
                         <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchFinansman || 0)}</span>
-                    </div>
-                    <div class="result-row">
-                        <span>Şube Toplam Faaliyet Gideri:</span>
-                        <span style="color: var(--accent-2);">${formatCurrency((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))}</span>
                     </div>
                     <div class="result-row total">
                         <span>Şube Net Maliyeti:</span>
@@ -990,12 +990,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-arge-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row">
+                        <span>Sınıf Toplam Faaliyet Gideri Payı:</span>
+                        <span id="cls-faaliyet-${cIndex}" style="color: var(--accent-2);">0 ₺</span>
+                    </div>
+                      <div class="result-row">
                         <span>Sınıf Finansman (Gelir/Gider) Payı:</span>
                         <span id="cls-finansman-${cIndex}" style="color: var(--danger);">0 ₺</span>
-                    </div>
-                    <div class="result-row">
-                        <span>Sınıf Toplam Faaliyet Gideri:</span>
-                        <span id="cls-faaliyet-${cIndex}" style="color: var(--accent-2);">0 ₺</span>
                     </div>
                     <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2);">
                         <span>Sınıf Net Maliyeti:</span>
@@ -1043,12 +1043,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-unit-arge-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
+                        <span>1 Adet Makine İçin Toplam Faaliyet Gideri Payı:</span>
+                        <span id="cls-unit-faaliyet-${cIndex}" style="color: var(--accent-2);">0 ₺</span>
+                    </div>
+                      <div class="result-row unit">
                         <span>1 Adet Makine İçin Finansman (Gelir/Gider) Payı:</span>
                         <span id="cls-unit-finansman-${cIndex}" style="color: var(--danger);">0 ₺</span>
-                    </div>
-                    <div class="result-row unit">
-                        <span>1 Adet Makine İçin Toplam Faaliyet Gideri:</span>
-                        <span id="cls-unit-faaliyet-${cIndex}" style="color: var(--accent-2);">0 ₺</span>
                     </div>
                     <div class="result-row total" style="margin-top: 1rem; border-left-color: var(--accent-3); background: linear-gradient(90deg, rgba(244, 63, 94, 0.15) 0%, transparent 100%); flex-direction: column; align-items: flex-start; gap: 0.5rem;">
                         <span style="font-size: 0.95rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">1 Adet Makine Maliyeti</span>
