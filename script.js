@@ -180,12 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         "Sınıf İşçilik Payı (₺)": clsLaborShare,
                         "Sınıf Toplam Genel Üretim Gideri Payı (₺)": clsGUG,
                         "Sınıf Pazarlama Gideri Payı (₺)": clsPazarlama,
-                        "Sınıf Genel Yönetim Gideri (GYG) Payı (₺)": cls.yonetim || 0,
+                        "Sınıf Genel Yönetim Gideri Payı (₺)": cls.yonetim || 0,
                         "Sınıf AR-GE Gideri Payı (₺)": cls.arge || 0,
                         "Sınıf Net Maliyeti (₺)": clsNet,
                         "1 Adet Makine İçin Genel Üretim Gideri Payı (₺)": cls.quantity > 0 ? (clsGUG / cls.quantity) : 0,
                         "1 Adet Makine İçin Pazarlama Gideri Payı (₺)": cls.quantity > 0 ? (clsPazarlama / cls.quantity) : 0,
-                        "1 Adet Makine İçin Genel Yönetim Gideri (GYG) Payı (₺)": cls.quantity > 0 ? ((cls.yonetim || 0) / cls.quantity) : 0,
+                        "1 Adet Makine İçin Genel Yönetim Gideri Payı (₺)": cls.quantity > 0 ? ((cls.yonetim || 0) / cls.quantity) : 0,
                         "1 Adet Makine İçin AR-GE Gideri Payı (₺)": cls.quantity > 0 ? ((cls.arge || 0) / cls.quantity) : 0,
                         "1 Adet Makine İçin Finansman (Gelir/Gider) Payı (₺)": cls.quantity > 0 ? ((cls.finansman || 0) / cls.quantity) : 0,
                         "1 Adet Makine Maliyeti (₺)": clsUnitCost,
@@ -795,7 +795,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span style="color: var(--accent-1);">${formatCurrency(branch.branchPazarlama)}</span>
                     </div>
                     <div class="result-row">
-                        <span>Şube Toplam Genel Yönetim Gideri (GYG) Payı:</span>
+                        <span>Şube Toplam Genel Yönetim Gideri Payı:</span>
                         <span style="color: var(--accent-1);">${formatCurrency(branch.branchYonetim)}</span>
                     </div>
                     <div class="result-row">
@@ -982,7 +982,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-paz-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row">
-                        <span>Sınıf Genel Yönetim Gideri (GYG) Payı:</span>
+                        <span>Sınıf Genel Yönetim Gideri Payı:</span>
                         <span id="cls-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row">
@@ -1035,7 +1035,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-unit-paz-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
-                        <span>1 Adet Makine İçin Genel Yönetim Gideri (GYG) Payı:</span>
+                        <span>1 Adet Makine İçin Genel Yönetim Gideri Payı:</span>
                         <span id="cls-unit-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
