@@ -1019,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="branch-results">
                     <div class="result-row unit">
-                        <span>1 Adet Makine Eşit Dağıtılan İşçilik Payı:</span>
+                        <span>1 Adet Makine İçin Eşit Dağıtılan İşçilik Payı:</span>
                         <span id="cls-unit-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
