@@ -784,7 +784,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Eşit Dağıtılan İşçilik Payı:</span>
-                        <span style="color: var(--accent-3);">${formatCurrency(branch.branchShare)}</span>
+                        <span style="color: var(--warning);">${formatCurrency(branch.branchShare)}</span>
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam Genel Üretim Gideri Payı:</span>
@@ -796,7 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam Genel Yönetim Gideri (GYG) Payı:</span>
-                        <span style="color: var(--accent-1);">${formatCurrency(branch.branchYonetim)}</span>
+                        <span style="color: var(--danger);">${formatCurrency(branch.branchYonetim)}</span>
                     </div>
                     <div class="result-row">
                         <span>Şube Toplam AR-GE Gideri Payı:</span>
@@ -967,11 +967,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Sınıf Eşit Dağıtılan İşçilik Payı:</span>
-                        <span id="cls-share-${cIndex}">0 ₺</span>
+                        <span id="cls-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
                     </div>
                     <div class="result-row">
                         <span>Sınıf İşçilik Payı:</span>
-                        <span id="cls-labor-share-${cIndex}">0 ₺</span>
+                        <span id="cls-labor-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
                     </div>
                     <div class="result-row">
                         <span>Sınıf Toplam Genel Üretim Gideri Payı:</span>
@@ -983,7 +983,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Sınıf Genel Yönetim Gideri (GYG) Payı:</span>
-                        <span id="cls-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
+                        <span id="cls-yonetim-${cIndex}" style="color: var(--danger);">0 ₺</span>
                     </div>
                     <div class="result-row">
                         <span>Sınıf AR-GE Gideri Payı:</span>
@@ -1020,11 +1020,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="branch-results">
                     <div class="result-row unit">
                         <span>1 Adet Makine Eşit Dağıtılan İşçilik Payı:</span>
-                        <span id="cls-unit-share-${cIndex}">0 ₺</span>
+                        <span id="cls-unit-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin İşçilik Payı:</span>
-                        <span id="cls-unit-labor-share-${cIndex}">0 ₺</span>
+                        <span id="cls-unit-labor-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Genel Üretim Gideri Payı:</span>
@@ -1036,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Genel Yönetim Gideri (GYG) Payı:</span>
-                        <span id="cls-unit-yonetim-${cIndex}" style="color: var(--accent-1);">0 ₺</span>
+                        <span id="cls-unit-yonetim-${cIndex}" style="color: var(--danger);">0 ₺</span>
                     </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin AR-GE Gideri Payı:</span>
