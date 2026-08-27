@@ -836,7 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)))}</span>
                     </div>
                     <div class="result-row total" style="margin-top: 0.5rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);">
-                        <span>Şube Net Kâr (Vergi Öncesi):</span>
+                        <span>Şube Net Kâr:</span>
                         <span style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0)) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0))}</span>
                     </div>
                 </div>
@@ -1037,7 +1037,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-faaliyet-kar-${cIndex}">0 ₺</span>
                     </div>
                     <div class="result-row total" style="background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); border-left-color: #8b5cf6; margin-top: 0.5rem;">
-                        <span>Sınıf Net Kâr (Vergi Öncesi):</span>
+                        <span>Sınıf Net Kâr:</span>
                         <span id="cls-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
                     </div>
                 </div>
@@ -1098,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span id="cls-unit-faaliyet-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
                     </div>
                     <div class="result-row unit" style="margin-top: 0.5rem; font-size: 1.2rem;">
-                        <span>1 Adet Makine İçin Net Kâr (Vergi Öncesi):</span>
+                        <span>1 Adet Makine İçin Net Kâr:</span>
                         <span id="cls-unit-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
                     </div>
                 </div>
