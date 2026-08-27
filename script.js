@@ -880,6 +880,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     elProfit.textContent = formatCurrency(branchData[bIndex].branchTotalProfit);
                     elProfit.style.color = branchData[bIndex].branchTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)';
                 }
+                  
+                  const elBranchTotalLabor = document.getElementById(`branch-total-labor-${bIndex}`);
+                  if (elBranchTotalLabor) elBranchTotalLabor.textContent = formatCurrency(branchData[bIndex].branchShare + branchData[bIndex].laborCost);
+                  
+                  const elBranchLaborCost = document.getElementById(`branch-labor-cost-${bIndex}`);
+                  if (elBranchLaborCost) elBranchLaborCost.textContent = formatCurrency(branchData[bIndex].laborCost);
             });
         });
 
