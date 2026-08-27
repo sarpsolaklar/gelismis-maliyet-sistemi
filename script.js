@@ -783,10 +783,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Şube Hammadde Toplamı:</span>
                         <span>${formatCurrency(branch.branchBaseTotal)}</span>
                     </div>
-                    <div class="result-row">
-                        <span>Şube Eşit Dağıtılan İşçilik Payı:</span>
-                        <span style="color: var(--warning);">${formatCurrency(branch.branchShare)}</span>
-                    </div>
+                    <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
+                          <span>Şube Toplam İşçilik Payı: <span class="chevron">▼</span></span>
+                          <span style="color: var(--warning);">${formatCurrency(branch.branchShare + (branch.laborCost || 0))}</span>
+                      </div>
+                      <div class="accordion-content">
+                          <div class="result-row">
+                              <span>Şube Eşit Dağıtılan İşçilik Payı:</span>
+                              <span style="color: var(--warning);">${formatCurrency(branch.branchShare)}</span>
+                          </div>
+                          <div class="result-row">
+                              <span>Şube İşçilik Maliyeti:</span>
+                              <span style="color: var(--warning);">${formatCurrency(branch.laborCost || 0)}</span>
+                          </div>
+                      </div>
                     <div class="result-row">
                         <span>Şube Toplam Genel Üretim Gideri Payı:</span>
                         <span style="color: var(--accent-4);">${formatCurrency(branch.branchGUG)}</span>
@@ -968,14 +978,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Şube Hammadde Toplamı:</span>
                         <span id="cls-bTotal-${cIndex}">0 ₺</span>
                     </div>
-                    <div class="result-row">
-                        <span>Sınıf Eşit Dağıtılan İşçilik Payı:</span>
-                        <span id="cls-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
-                    </div>
-                    <div class="result-row">
-                        <span>Sınıf İşçilik Payı:</span>
-                        <span id="cls-labor-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
-                    </div>
+                    <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
+                          <span>Sınıf Toplam İşçilik Payı: <span class="chevron">▼</span></span>
+                          <span id="cls-total-labor-${cIndex}" style="color: var(--warning);">0 ₺</span>
+                      </div>
+                      <div class="accordion-content">
+                          <div class="result-row">
+                              <span>Sınıf Eşit Dağıtılan İşçilik Payı:</span>
+                              <span id="cls-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
+                          </div>
+                          <div class="result-row">
+                              <span>Sınıf İşçilik Payı:</span>
+                              <span id="cls-labor-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
+                          </div>
+                      </div>
                     <div class="result-row">
                         <span>Sınıf Toplam Genel Üretim Gideri Payı:</span>
                         <span id="cls-gug-${cIndex}" style="color: var(--accent-4);">0 ₺</span>
@@ -1023,14 +1039,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="divider"></div>
 
                 <div class="branch-results">
-                    <div class="result-row unit">
-                        <span>1 Adet Makine İçin Eşit Dağıtılan İşçilik Payı:</span>
-                        <span id="cls-unit-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
-                    </div>
-                    <div class="result-row unit">
-                        <span>1 Adet Makine İçin İşçilik Payı:</span>
-                        <span id="cls-unit-labor-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
-                    </div>
+                    <div class="result-row unit accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
+                          <span>1 Adet Makine İçin Toplam İşçilik Payı: <span class="chevron">▼</span></span>
+                          <span id="cls-unit-total-labor-${cIndex}" style="color: var(--warning);">0 ₺</span>
+                      </div>
+                      <div class="accordion-content">
+                          <div class="result-row unit">
+                              <span>1 Adet Makine İçin Eşit Dağıtılan İşçilik Payı:</span>
+                              <span id="cls-unit-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
+                          </div>
+                          <div class="result-row unit">
+                              <span>1 Adet Makine İçin İşçilik Payı:</span>
+                              <span id="cls-unit-labor-share-${cIndex}" style="color: var(--warning);">0 ₺</span>
+                          </div>
+                      </div>
                     <div class="result-row unit">
                         <span>1 Adet Makine İçin Genel Üretim Gideri Payı:</span>
                         <span id="cls-unit-gug-${cIndex}" style="color: var(--accent-4);">0 ₺</span>
