@@ -633,6 +633,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 elBase.textContent = formatCurrency(cls.baseTotal);
                 document.getElementById(`cls-share-${cIndex}`).textContent = formatCurrency(clsShare);
                 document.getElementById(`cls-labor-share-${cIndex}`).textContent = formatCurrency(clsLaborShare);
+                  const elTotalLabor = document.getElementById(`cls-total-labor-${cIndex}`);
+                  if (elTotalLabor) elTotalLabor.textContent = formatCurrency(clsShare + clsLaborShare);
                 document.getElementById(`cls-gug-${cIndex}`).textContent = formatCurrency(clsGUG);
                 const elClsPaz = document.getElementById(`cls-paz-${cIndex}`);
                 if (elClsPaz) elClsPaz.textContent = formatCurrency(clsPazarlama);
@@ -673,6 +675,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const elUnitLaborShare = document.getElementById(`cls-unit-labor-share-${cIndex}`);
                 if (elUnitLaborShare) elUnitLaborShare.textContent = formatCurrency(clsUnitLaborShare);
+                  const elUnitTotalLabor = document.getElementById(`cls-unit-total-labor-${cIndex}`);
+                  if (elUnitTotalLabor) elUnitTotalLabor.textContent = formatCurrency(clsUnitShare + clsUnitLaborShare);
                 
                 const elUnitGug = document.getElementById(`cls-unit-gug-${cIndex}`);
                 if (elUnitGug) elUnitGug.textContent = formatCurrency(clsUnitGUG);
