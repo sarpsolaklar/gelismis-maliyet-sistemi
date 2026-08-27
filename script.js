@@ -312,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (globalPazarlamaInput) globalPazarlamaInput.value = s.globalPazarlama || 0;
         if (globalYonetimInput) globalYonetimInput.value = s.globalYonetim || 0;
         if (globalArgeInput) globalArgeInput.value = s.globalArge || 0;
+          if (globalFinansmanInput) globalFinansmanInput.value = s.globalFinansman || 0;
         
         const rateUSD = document.getElementById('rateUSD');
         if (rateUSD) rateUSD.value = s.rateUSD !== undefined ? s.rateUSD : 34.50;
@@ -330,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
             globalGUG: globalGUGInput.value,
             globalPazarlama: globalPazarlamaInput ? globalPazarlamaInput.value : 0,
             globalYonetim: globalYonetimInput ? globalYonetimInput.value : 0,
-            globalArge: globalArge,
+            globalArge: globalArgeInput ? globalArgeInput.value : 0,
                 globalFinansman: globalFinansmanInput ? globalFinansmanInput.value : 0,
             rateUSD: 34.50,
             rateEUR: 38.20,
