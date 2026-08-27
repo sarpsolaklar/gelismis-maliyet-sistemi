@@ -785,16 +785,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>Şube Toplam İşçilik Payı: <span class="chevron">▼</span></span>
-                          <span style="color: var(--warning);">${formatCurrency(branch.branchShare + (branch.laborCost || 0))}</span>
+                          <span id="branch-total-labor-${bIndex}" style="color: var(--warning);">${formatCurrency(branch.branchShare + (branch.laborCost || 0))}</span>
                       </div>
                       <div class="accordion-content">
                           <div class="result-row">
                               <span>Şube Eşit Dağıtılan İşçilik Payı:</span>
-                              <span style="color: var(--warning);">${formatCurrency(branch.branchShare)}</span>
+                              <span id="branch-share-labor-${bIndex}" style="color: var(--warning);">${formatCurrency(branch.branchShare)}</span>
                           </div>
                           <div class="result-row">
                               <span>Şube İşçilik Maliyeti:</span>
-                              <span style="color: var(--warning);">${formatCurrency(branch.laborCost || 0)}</span>
+                              <span id="branch-labor-cost-${bIndex}" style="color: var(--warning);">${formatCurrency(branch.laborCost || 0)}</span>
                           </div>
                       </div>
                     <div class="result-row">
