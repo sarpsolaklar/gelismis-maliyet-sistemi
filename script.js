@@ -767,7 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'glass-card';
             
-            const netTotal = globalNetTotal || 0;
+            const netTotal = branch.branchNetTotal || 0;
             const classCount = branch.subClasses.length;
 
             card.innerHTML = `
@@ -799,11 +799,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       </div>
                       <div class="result-row">
                         <span>Şube Hammadde Toplamı:</span>
-                        <span>${formatWithPercent(branch.branchBaseTotal, netTotal)}</span>
+                        <span>${formatWithPercent(branch.branchBaseTotal, globalNetTotal)}</span>
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>Şube Toplam İşçilik Payı: <span class="chevron">▼</span></span>
-                          <span id="branch-total-labor-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.branchShare + (branch.laborCost || 0), netTotal)}</span>
+                          <span id="branch-total-labor-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.branchShare + (branch.laborCost || 0), globalNetTotal)}</span>
                       </div>
                       <div class="accordion-content">
                           <div class="result-row">
@@ -817,29 +817,29 @@ document.addEventListener('DOMContentLoaded', () => {
                       </div>
                     <div class="result-row">
                         <span>Şube Toplam Genel Üretim Gideri Payı:</span>
-                        <span style="color: var(--accent-4);">${formatWithPercent(branch.branchGUG, netTotal)}</span>
+                        <span style="color: var(--accent-4);">${formatWithPercent(branch.branchGUG, globalNetTotal)}</span>
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>Şube Toplam Faaliyet Gideri Payı: <span class="chevron">▼</span></span>
-                          <span style="color: var(--accent-2);">${formatWithPercent((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0), netTotal)}</span>
+                          <span style="color: var(--accent-2);">${formatWithPercent((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0), globalNetTotal)}</span>
                       </div>
                       <div class="accordion-content">
                           <div class="result-row">
                               <span>Şube Toplam Pazarlama Gideri Payı:</span>
-                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchPazarlama, netTotal)}</span>
+                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchPazarlama, globalNetTotal)}</span>
                           </div>
                           <div class="result-row">
                               <span>Şube Toplam Genel Yönetim Gideri Payı:</span>
-                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchYonetim, netTotal)}</span>
+                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchYonetim, globalNetTotal)}</span>
                           </div>
                           <div class="result-row">
                               <span>Şube Toplam AR-GE Gideri Payı:</span>
-                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchArge || 0, netTotal)}</span>
+                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchArge || 0, globalNetTotal)}</span>
                           </div>
                       </div>
                       <div class="result-row">
                         <span>Şube Finansman (Gelir/Gider) Payı:</span>
-                        <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchFinansman || 0, netTotal)}</span>
+                        <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchFinansman || 0, globalNetTotal)}</span>
                     </div>
                     <div class="result-row total">
                         <span>Şube Net Maliyeti:</span>
