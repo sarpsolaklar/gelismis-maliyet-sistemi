@@ -1297,7 +1297,6 @@ document.addEventListener('DOMContentLoaded', () => {
         saveData();
         renderMainView();
         calculateGlobal();
-        renderFactorySummary();
     });
 
     btnAddClass.addEventListener('click', function addNewClass() {
