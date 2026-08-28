@@ -1004,9 +1004,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Sınıf Net Maliyeti:</span>
                         <span id="cls-net-${cIndex}">0 ₺</span>
                     </div>
-                      <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; margin-bottom: 0.5rem; opacity: 0.8; line-height: 1.4;">
-                          <i style="margin-right:4px;">ℹ</i>Kâr oranları, sınıfın kendi <b>Net Maliyeti</b> üzerinden kâr marjını gösterir.
-                      </div>
                     <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); border-left-color: #8b5cf6; margin-top: 0.5rem;">
                           <span>Sınıf Net Kâr: <span class="chevron">▼</span></span>
                           <span id="cls-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
@@ -1078,9 +1075,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span style="font-size: 0.95rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">1 Adet Makine Maliyeti</span>
                         <span id="cls-unit-${cIndex}" style="font-size: 2rem; font-weight: 800; color: var(--text-primary);">0 ₺</span>
                     </div>
-                      <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; margin-bottom: 0.5rem; opacity: 0.8; line-height: 1.4;">
-                          <i style="margin-right:4px;">ℹ</i>Kâr oranları, 1 adet makinenin kendi <b>Net Maliyeti</b> üzerinden kâr marjını gösterir.
-                      </div>
                     <div class="result-row unit accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; font-size: 1.2rem;">
                           <span>1 Adet Makine İçin Net Kâr: <span class="chevron">▼</span></span>
                           <span id="cls-unit-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
