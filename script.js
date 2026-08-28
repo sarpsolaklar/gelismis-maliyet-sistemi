@@ -1499,7 +1499,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span>${formatCurrency(netMaliyet)}</span>
             </div>
             <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);">
-                <span>Fabrika Net Kâr: <span class="chevron"> </span></span>
+                <span style="display: flex; align-items: center; gap: 8px;">Fabrika Net Kâr: <span class="chevron">▼</span></span>
                 <span style="color: ${netKar >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(netKar, netMaliyet)}</span>
             </div>
             <div class="accordion-content active">
@@ -1525,7 +1525,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             
             <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="cursor: pointer;">
-            <span style="display: flex; align-items: center; gap: 8px;">Fabrika Toplam İşçilik Payı: <span class="chevron"></span></span>
+            <span style="display: flex; align-items: center; gap: 8px;">Fabrika Toplam İşçilik Payı: <span class="chevron">▼</span></span>
             <span style="color: var(--warning);">${formatWithPercent(totalIscilik, netMaliyet)}</span>
         </div>
         <div class="accordion-content">
@@ -1544,24 +1544,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span style="color: var(--accent-4);">${formatWithPercent(totalGUG, netMaliyet)}</span>
             </div>
             
-            <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
-                <span>Fabrika Toplam Faaliyet Gideri Payı: <span class="chevron"> </span></span>
-                <span style="color: var(--accent-2);">${formatWithPercent(totalFaaliyet, netMaliyet)}</span>
+            <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="cursor: pointer;">
+            <span style="display: flex; align-items: center; gap: 8px;">Fabrika Toplam Faaliyet Gideri Payı: <span class="chevron">▼</span></span>
+            <span style="color: var(--accent-2);">${formatWithPercent(totalFaaliyet, netMaliyet)}</span>
+        </div>
+        <div class="accordion-content">
+            <div class="result-row" style="padding-left: 1rem;">
+                <span>Fabrika Toplam Pazarlama Gideri Payı:</span>
+                <span style="color: var(--accent-1);">${formatWithPercent(totalPazarlama, netMaliyet)}</span>
             </div>
-            <div class="accordion-content">
-                <div class="result-row">
-                    <span>Fabrika Toplam Pazarlama Gideri Payı:</span>
-                    <span style="color: var(--accent-1);">${formatWithPercent(totalPazarlama, netMaliyet)}</span>
-                </div>
-                <div class="result-row">
-                    <span>Fabrika Toplam Genel Yönetim Gideri Payı:</span>
-                    <span style="color: var(--accent-1);">${formatWithPercent(totalYonetim, netMaliyet)}</span>
-                </div>
-                <div class="result-row">
-                    <span>Fabrika Toplam AR-GE Gideri Payı:</span>
-                    <span style="color: var(--accent-1);">${formatWithPercent(totalArge, netMaliyet)}</span>
-                </div>
+            <div class="result-row" style="padding-left: 1rem;">
+                <span>Fabrika Toplam Genel Yönetim Gideri Payı:</span>
+                <span style="color: var(--accent-1);">${formatWithPercent(totalYonetim, netMaliyet)}</span>
             </div>
+            <div class="result-row" style="padding-left: 1rem;">
+                <span>Fabrika Toplam AR-GE Gideri Payı:</span>
+                <span style="color: var(--accent-1);">${formatWithPercent(totalArge, netMaliyet)}</span>
+            </div>
+        </div>
             
             <div class="result-row">
                 <span>Fabrika Finansman (Gelir/Gider) Payı:</span>
