@@ -785,7 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="branch-results">
                     <div class="result-row">
                         <span>Şubenin İçerdiği Sınıf Sayısı:</span>
-                        <span>${classCount} adet</span>
+                        <span>${classCount} Adet</span>
                     </div>
                     <div class="result-row total">
                         <span>Şube Net Maliyeti:</span>
@@ -1511,7 +1511,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             <div class="result-row">
                 <span>Toplam Sınıf Sayısı:</span>
-                <span>${classCount} adet</span>
+                <span>${classCount} Adet</span>
             </div>
             <div class="result-row">
                 <span>Fabrika Hammadde Toplamı:</span>
