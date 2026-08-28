@@ -795,10 +795,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>${classCount} Adet</span>
                     </div>
                     <div class="result-row">
-                        <span>Toplam Satış Adedi:</span>
-                        <span>${branchTotalQuantity} Adet</span>
-                    </div>
-                    <div class="result-row">
                         <span>Toplam Satış Geliri (Ciro):</span>
                         <span style="color: var(--success); font-weight: 600;">${formatCurrency(branchTotalRevenue)}</span>
                     </div>
