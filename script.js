@@ -1442,6 +1442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.getElementById('mainBranchesContainer').style.display = 'grid';
         document.getElementById('factorySummaryContainer').style.display = 'none';
+    document.getElementById('globalSidePanel').style.display = 'block';
     });
 
     document.getElementById('tab-summary').addEventListener('click', function() {
@@ -1460,6 +1461,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.getElementById('mainBranchesContainer').style.display = 'none';
         document.getElementById('factorySummaryContainer').style.display = 'block';
+    document.getElementById('globalSidePanel').style.display = 'none';
     });
 
     function renderFactorySummary() {
