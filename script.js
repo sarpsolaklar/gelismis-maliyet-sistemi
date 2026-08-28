@@ -794,6 +794,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Şubenin İçerdiği Sınıf Sayısı:</span>
                         <span>${classCount} adet</span>
                     </div>
+                    <div class="result-row total">
+                        <span>Şube Net Maliyeti:</span>
+                        <span>${formatWithPercent(netTotal, globalNetTotal)}</span>
+                    </div>
+                    <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);">
+                          <span>Şube Net Kâr: <span class="chevron">▼</span></span>
+                          <span id="branch-net-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0)) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0), netTotal)}</span>
+                      </div>
+                      <div class="accordion-content">
+                          <div class="result-row total" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%);">
+                              <span>Şube Faaliyet Kârı:</span>
+                              <span id="branch-faaliyet-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)), netTotal)}</span>
+                          </div>
+                          <div class="result-row total" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%);">
+                              <span>Şube Brüt Kâr:</span>
+                              <span id="branch-brut-kar-${bIndex}" style="color: ${branch.branchTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit, netTotal)}</span>
+                          </div>
+                      </div>
+                      <div style="margin-top: 1rem; margin-bottom: 1rem; height: 1px; background: var(--border-color); opacity: 0.5;"></div>
                     <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
                           <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, bu Şubenin <b>Tüm Fabrika Net Maliyeti (Global Net Total)</b> içerisindeki payını gösterir.
                       </div>
@@ -841,24 +860,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Şube Finansman (Gelir/Gider) Payı:</span>
                         <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchFinansman || 0, globalNetTotal)}</span>
                     </div>
-                    <div class="result-row total">
-                        <span>Şube Net Maliyeti:</span>
-                        <span>${formatWithPercent(netTotal, globalNetTotal)}</span>
-                    </div>
-                    <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);">
-                          <span>Şube Net Kâr: <span class="chevron">▼</span></span>
-                          <span id="branch-net-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0)) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0), netTotal)}</span>
-                      </div>
-                      <div class="accordion-content">
-                          <div class="result-row total" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%);">
-                              <span>Şube Faaliyet Kârı:</span>
-                              <span id="branch-faaliyet-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)), netTotal)}</span>
-                          </div>
-                          <div class="result-row total" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%);">
-                              <span>Şube Brüt Kâr:</span>
-                              <span id="branch-brut-kar-${bIndex}" style="color: ${branch.branchTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit, netTotal)}</span>
-                          </div>
-                      </div>
                 </div>
                 
                 <button class="btn-enter" data-bindex="${bIndex}">
