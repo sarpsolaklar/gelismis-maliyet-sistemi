@@ -794,7 +794,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Şubenin İçerdiği Sınıf Sayısı:</span>
                         <span>${classCount} adet</span>
                     </div>
-                    <div class="result-row">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
+                          <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, bu Şubenin <b>Tüm Fabrika Net Maliyeti (Global Net Total)</b> içerisindeki payını gösterir.
+                      </div>
+                      <div class="result-row">
                         <span>Şube Hammadde Toplamı:</span>
                         <span>${formatWithPercent(branch.branchBaseTotal, netTotal)}</span>
                     </div>
@@ -998,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="branch-results">
                     <div class="result-row">
-                        <span>Şube Hammadde Toplamı:</span>
+                        <span>Sınıf Hammadde Toplamı:</span>
                         <span id="cls-bTotal-${cIndex}">0 ₺</span>
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
