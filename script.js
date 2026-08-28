@@ -1464,7 +1464,6 @@ document.getElementById('tab-summary').addEventListener('click', function() {
     
     document.getElementById('mainBranchesContainer').style.display = 'none';
     document.getElementById('factorySummaryContainer').style.display = 'block';
-});
 
 function renderFactorySummary() {
     let totalHammadde = 0;
@@ -1574,3 +1573,6 @@ function renderFactorySummary() {
     
     document.getElementById('factorySummaryResults').innerHTML = html;
 }
+
+});
+
