@@ -759,8 +759,16 @@ document.addEventListener('DOMContentLoaded', () => {
         branchData.forEach((branch, bIndex) => {
             const card = document.createElement('div');
             card.className = 'glass-card';
-            
             const netTotal = branch.branchNetTotal || 0;
+            const classCount = branch.subClasses.length;
+            let branchTotalQuantity = 0;
+            let branchTotalRevenue = 0;
+            if (branch.subClasses) {
+                branch.subClasses.forEach(cls => {
+                    branchTotalQuantity += (cls.quantity || 0);
+                    branchTotalRevenue += ((cls.quantity || 0) * (cls.salePrice || 0));
+                });
+            }
             const classCount = branch.subClasses.length;
 
             card.innerHTML = `
@@ -786,6 +794,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="result-row">
                         <span>Şubenin İçerdiği Sınıf Sayısı:</span>
                         <span>${classCount} Adet</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Toplam Satış Adedi:</span>
+                        <span>${branchTotalQuantity} Adet</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Toplam Satış Geliri (Ciro):</span>
+                        <span style="color: var(--success); font-weight: 600;">${formatCurrency(branchTotalRevenue)}</span>
                     </div>
                     <div class="result-row total">
                         <span>Şube Net Maliyeti:</span>
