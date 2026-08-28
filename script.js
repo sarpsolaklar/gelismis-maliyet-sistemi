@@ -568,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const elEmp = document.getElementById('totalEmployeeCount');
         if (elEmp) elEmp.textContent = branchData.length + ' Şube';
         
-        const globalNetTotal = globalBase + globalLabor + globalExpense + totalGUG + totalPazarlama + totalYonetim + totalArge;
+        const globalNetTotal = globalBase + globalLabor + globalExpense + totalGUG + totalPazarlama + totalYonetim + totalArge; window.globalNetTotal = globalNetTotal;
         const globalNetProfit = globalTotalSales - (globalNetTotal - totalPazarlama - totalYonetim - totalArge);
         
         const elNetCost = document.getElementById('globalNetCost');
@@ -679,31 +679,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 
                   const elUnitBase = document.getElementById(`cls-unit-base-${cIndex}`);
-                  if (elUnitBase) elUnitBase.textContent = formatWithPercent(cls.machineCost || 0, clsUnitCost);
+                  if (elUnitBase) elUnitBase.textContent = formatWithPercent(cls.machineCost || 0, window.globalNetTotal);
                   
                   const elUnitShare = document.getElementById(`cls-unit-share-${cIndex}`);
-                if (elUnitShare) elUnitShare.textContent = formatWithPercent(clsUnitShare, clsUnitCost);
+                if (elUnitShare) elUnitShare.textContent = formatWithPercent(clsUnitShare, window.globalNetTotal);
                 
                 const elUnitLaborShare = document.getElementById(`cls-unit-labor-share-${cIndex}`);
-                if (elUnitLaborShare) elUnitLaborShare.textContent = formatWithPercent(clsUnitLaborShare, clsUnitCost);
+                if (elUnitLaborShare) elUnitLaborShare.textContent = formatWithPercent(clsUnitLaborShare, window.globalNetTotal);
                   const elUnitTotalLabor = document.getElementById(`cls-unit-total-labor-${cIndex}`);
-                  if (elUnitTotalLabor) elUnitTotalLabor.textContent = formatWithPercent(clsUnitShare + clsUnitLaborShare, clsUnitCost);
+                  if (elUnitTotalLabor) elUnitTotalLabor.textContent = formatWithPercent(clsUnitShare + clsUnitLaborShare, window.globalNetTotal);
                 
                 const elUnitGug = document.getElementById(`cls-unit-gug-${cIndex}`);
-                if (elUnitGug) elUnitGug.textContent = formatWithPercent(clsUnitGUG, clsUnitCost);
+                if (elUnitGug) elUnitGug.textContent = formatWithPercent(clsUnitGUG, window.globalNetTotal);
                 const elUnitPaz = document.getElementById(`cls-unit-paz-${cIndex}`);
-                if (elUnitPaz) elUnitPaz.textContent = formatWithPercent(clsUnitPazarlama, clsUnitCost);
+                if (elUnitPaz) elUnitPaz.textContent = formatWithPercent(clsUnitPazarlama, window.globalNetTotal);
                 const elUnitYonetim = document.getElementById(`cls-unit-yonetim-${cIndex}`);
-                if (elUnitYonetim) elUnitYonetim.textContent = formatWithPercent(clsUnitYonetim, clsUnitCost);
+                if (elUnitYonetim) elUnitYonetim.textContent = formatWithPercent(clsUnitYonetim, window.globalNetTotal);
                 const elUnitArge = document.getElementById(`cls-unit-arge-${cIndex}`);
-                if (elUnitArge) elUnitArge.textContent = formatWithPercent(clsUnitArge, clsUnitCost);
+                if (elUnitArge) elUnitArge.textContent = formatWithPercent(clsUnitArge, window.globalNetTotal);
                 const elUnitFinansman = document.getElementById(`cls-unit-finansman-${cIndex}`);
                 if (elUnitFinansman) {
-                    elUnitFinansman.textContent = formatWithPercent(clsUnitFinansman, clsUnitCost);
+                    elUnitFinansman.textContent = formatWithPercent(clsUnitFinansman, window.globalNetTotal);
                     elUnitFinansman.style.color = clsUnitFinansman < 0 ? "var(--success)" : "var(--danger)";
                 }
                 const elUnitFaaliyet = document.getElementById(`cls-unit-faaliyet-${cIndex}`);
-                if (elUnitFaaliyet) elUnitFaaliyet.textContent = formatWithPercent(clsUnitPazarlama + clsUnitYonetim + clsUnitArge, clsUnitCost);
+                if (elUnitFaaliyet) elUnitFaaliyet.textContent = formatWithPercent(clsUnitPazarlama + clsUnitYonetim + clsUnitArge, window.globalNetTotal);
                 
                 const elUnitCost = document.getElementById(`cls-unit-${cIndex}`);
                 if (elUnitCost) elUnitCost.textContent = formatCurrency(clsUnitCost);
