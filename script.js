@@ -821,16 +821,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>Şube Toplam Faaliyet Gideri Payı: <span class="chevron">▼</span></span>
-                          <span style="color: var(--accent-2);">${formatCurrency((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))}</span>
+                          <span style="color: var(--accent-2);">${formatWithPercent((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0), netTotal)}</span>
                       </div>
                       <div class="accordion-content">
                           <div class="result-row">
                               <span>Şube Toplam Pazarlama Gideri Payı:</span>
-                              <span style="color: var(--accent-1);">${formatCurrency(branch.branchPazarlama)}</span>
+                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchPazarlama, netTotal)}</span>
                           </div>
                           <div class="result-row">
                               <span>Şube Toplam Genel Yönetim Gideri Payı:</span>
-                              <span style="color: var(--accent-1);">${formatCurrency(branch.branchYonetim)}</span>
+                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchYonetim, netTotal)}</span>
                           </div>
                           <div class="result-row">
                               <span>Şube Toplam AR-GE Gideri Payı:</span>
