@@ -794,9 +794,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Şubenin İçerdiği Sınıf Sayısı:</span>
                         <span>${classCount} Adet</span>
                     </div>
-                    <div class="result-row">
+                    <div class="result-row total">
                         <span>Toplam Satış Geliri (Ciro):</span>
-                        <span style="color: var(--success); font-weight: 600;">${formatCurrency(branchTotalRevenue)}</span>
+                        <span>${formatCurrency(branchTotalRevenue)}</span>
                     </div>
                     <div class="result-row total">
                         <span>Şube Net Maliyeti:</span>
