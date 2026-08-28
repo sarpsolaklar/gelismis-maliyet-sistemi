@@ -1484,6 +1484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalYonetim = 0;
         let totalArge = 0;
         let totalFinansman = 0;
+        let totalCiro = 0;
         let classCount = 0;
         let brutKar = 0;
         
@@ -1498,6 +1499,11 @@ document.addEventListener('DOMContentLoaded', () => {
             totalFinansman += branch.branchFinansman || 0;
             classCount += branch.subClasses.length;
             brutKar += branch.branchTotalProfit || 0;
+            if (branch.subClasses) {
+                branch.subClasses.forEach(cls => {
+                    totalCiro += (cls.quantity || 0) * (cls.salePrice || 0);
+                });
+            }
         });
         
         const totalIscilik = totalEsitIscilik + totalDirektIscilik;
@@ -1511,6 +1517,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const brutKarText = (brutKar < 0 ? "Eksi " : "") + numberToTurkishText(Math.abs(brutKar));
 
         const html = `
+            <div class="result-row total">
+                <span style="margin-top: 4px;">Fabrika Toplam Satış Geliri (Ciro):</span>
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <span style="color: var(--success); font-weight: 600;">${formatCurrency(totalCiro)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${numberToTurkishText(totalCiro)})</span>
+                </div>
+            </div>
             <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start;">
                 <span style="margin-top: 4px;">Fabrika Net Maliyeti:</span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
