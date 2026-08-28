@@ -662,6 +662,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     elClsNetKar.style.color = netKari >= 0 ? "var(--success)" : "var(--danger)";
                 }
                 document.getElementById(`cls-net-${cIndex}`).textContent = formatCurrency(clsNet);
+                const elClsRevenue = document.getElementById(`cls-revenue-${cIndex}`);
+                if (elClsRevenue) {
+                    elClsRevenue.textContent = formatCurrency((cls.quantity || 0) * (cls.salePrice || 0));
+                }
                 
                 const clsTotalProfit = clsProfit * cls.quantity;
                 const elTotalProfit = document.getElementById(`cls-total-profit-${cIndex}`);
@@ -1006,6 +1010,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="divider"></div>
 
                 <div class="branch-results">
+                    <div class="result-row total">
+                        <span>Sınıf Toplam Satış Geliri (Ciro):</span>
+                        <span id="cls-revenue-${cIndex}" style="font-weight: 600;">0 ₺</span>
+                    </div>
                     <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2);">
                         <span>Sınıf Net Maliyeti:</span>
                         <span id="cls-net-${cIndex}">0 ₺</span>
