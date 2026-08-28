@@ -767,7 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'glass-card';
             
-            const netTotal = branch.branchNetTotal || 0;
+            const netTotal = globalNetTotal || 0;
             const classCount = branch.subClasses.length;
 
             card.innerHTML = `
