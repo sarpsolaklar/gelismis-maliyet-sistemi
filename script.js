@@ -690,7 +690,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   if (elUnitTotalLabor) elUnitTotalLabor.textContent = formatWithPercent(clsUnitShare + clsUnitLaborShare, clsUnitCost);
                 
                 const elUnitGug = document.getElementById(`cls-unit-gug-${cIndex}`);
-                if (elUnitGug) elUnitGug.textContent = formatCurrency(clsUnitGUG);
+                if (elUnitGug) elUnitGug.textContent = formatWithPercent(clsUnitGUG, clsUnitCost);
                 const elUnitPaz = document.getElementById(`cls-unit-paz-${cIndex}`);
                 if (elUnitPaz) elUnitPaz.textContent = formatWithPercent(clsUnitPazarlama, clsUnitCost);
                 const elUnitYonetim = document.getElementById(`cls-unit-yonetim-${cIndex}`);
