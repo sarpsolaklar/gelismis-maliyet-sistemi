@@ -646,16 +646,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elClsPaz = document.getElementById(`cls-paz-${cIndex}`);
                 if (elClsPaz) elClsPaz.textContent = formatWithPercent(clsPazarlama, clsNet);
                 const elClsYonetim = document.getElementById(`cls-yonetim-${cIndex}`);
-                if (elClsYonetim) elClsYonetim.textContent = formatCurrency(clsYonetim);
+                if (elClsYonetim) elClsYonetim.textContent = formatWithPercent(clsYonetim, clsNet);
                 const elClsArge = document.getElementById(`cls-arge-${cIndex}`);
-                if (elClsArge) elClsArge.textContent = formatCurrency(clsArge);
+                if (elClsArge) elClsArge.textContent = formatWithPercent(clsArge, clsNet);
                 const elClsFinansman = document.getElementById(`cls-finansman-${cIndex}`);
                 if (elClsFinansman) {
-                    elClsFinansman.textContent = formatCurrency(clsFinansman);
+                    elClsFinansman.textContent = formatWithPercent(clsFinansman, clsNet);
                     elClsFinansman.style.color = clsFinansman < 0 ? "var(--success)" : "var(--danger)";
                 }
                 const elClsFaaliyet = document.getElementById(`cls-faaliyet-${cIndex}`);
-                if (elClsFaaliyet) elClsFaaliyet.textContent = formatCurrency(clsPazarlama + clsYonetim + clsArge);
+                if (elClsFaaliyet) elClsFaaliyet.textContent = formatWithPercent(clsPazarlama + clsYonetim + clsArge, clsNet);
                 const elClsFaaliyetKar = document.getElementById(`cls-faaliyet-kar-${cIndex}`);
                 if (elClsFaaliyetKar) {
                     const faaliyetKari = clsProfit - (clsPazarlama + clsYonetim + clsArge);
@@ -690,16 +690,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elUnitPaz = document.getElementById(`cls-unit-paz-${cIndex}`);
                 if (elUnitPaz) elUnitPaz.textContent = formatWithPercent(clsUnitPazarlama, clsUnitCost);
                 const elUnitYonetim = document.getElementById(`cls-unit-yonetim-${cIndex}`);
-                if (elUnitYonetim) elUnitYonetim.textContent = formatCurrency(clsUnitYonetim);
+                if (elUnitYonetim) elUnitYonetim.textContent = formatWithPercent(clsUnitYonetim, clsUnitCost);
                 const elUnitArge = document.getElementById(`cls-unit-arge-${cIndex}`);
-                if (elUnitArge) elUnitArge.textContent = formatCurrency(clsUnitArge);
+                if (elUnitArge) elUnitArge.textContent = formatWithPercent(clsUnitArge, clsUnitCost);
                 const elUnitFinansman = document.getElementById(`cls-unit-finansman-${cIndex}`);
                 if (elUnitFinansman) {
-                    elUnitFinansman.textContent = formatCurrency(clsUnitFinansman);
+                    elUnitFinansman.textContent = formatWithPercent(clsUnitFinansman, clsUnitCost);
                     elUnitFinansman.style.color = clsUnitFinansman < 0 ? "var(--success)" : "var(--danger)";
                 }
                 const elUnitFaaliyet = document.getElementById(`cls-unit-faaliyet-${cIndex}`);
-                if (elUnitFaaliyet) elUnitFaaliyet.textContent = formatCurrency(clsUnitPazarlama + clsUnitYonetim + clsUnitArge);
+                if (elUnitFaaliyet) elUnitFaaliyet.textContent = formatWithPercent(clsUnitPazarlama + clsUnitYonetim + clsUnitArge, clsUnitCost);
                 
                 const elUnitCost = document.getElementById(`cls-unit-${cIndex}`);
                 if (elUnitCost) elUnitCost.textContent = formatCurrency(clsUnitCost);
