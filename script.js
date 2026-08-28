@@ -658,13 +658,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (elClsFaaliyet) elClsFaaliyet.textContent = formatWithPercent(clsPazarlama + clsYonetim + clsArge, clsNet);
                 const elClsFaaliyetKar = document.getElementById(`cls-faaliyet-kar-${cIndex}`);
                 if (elClsFaaliyetKar) {
-                    const faaliyetKari = clsProfit - (clsPazarlama + clsYonetim + clsArge);
+                    const faaliyetKari = (clsProfit * cls.quantity) - (clsPazarlama + clsYonetim + clsArge);
                     elClsFaaliyetKar.textContent = formatCurrency(faaliyetKari);
                     elClsFaaliyetKar.style.color = faaliyetKari >= 0 ? "var(--success)" : "var(--danger)";
                 }
                 const elClsNetKar = document.getElementById(`cls-net-kar-${cIndex}`);
                 if (elClsNetKar) {
-                    const netKari = clsProfit - (clsPazarlama + clsYonetim + clsArge) - clsFinansman;
+                    const netKari = (clsProfit * cls.quantity) - (clsPazarlama + clsYonetim + clsArge) - clsFinansman;
                     elClsNetKar.textContent = formatCurrency(netKari);
                     elClsNetKar.style.color = netKari >= 0 ? "var(--success)" : "var(--danger)";
                 }
