@@ -677,7 +677,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     elTotalProfit.style.color = clsTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)';
                 }
                 
-                const elUnitShare = document.getElementById(`cls-unit-share-${cIndex}`);
+                
+                  const elUnitBase = document.getElementById(`cls-unit-base-${cIndex}`);
+                  if (elUnitBase) elUnitBase.textContent = formatWithPercent(cls.machineCost || 0, clsUnitCost);
+                  
+                  const elUnitShare = document.getElementById(`cls-unit-share-${cIndex}`);
                 if (elUnitShare) elUnitShare.textContent = formatWithPercent(clsUnitShare, clsUnitCost);
                 
                 const elUnitLaborShare = document.getElementById(`cls-unit-labor-share-${cIndex}`);
@@ -792,7 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row">
                         <span>Şube Hammadde Toplamı:</span>
-                        <span>${formatCurrency(branch.branchBaseTotal)}</span>
+                        <span>${formatWithPercent(branch.branchBaseTotal, netTotal)}</span>
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>Şube Toplam İşçilik Payı: <span class="chevron">▼</span></span>
