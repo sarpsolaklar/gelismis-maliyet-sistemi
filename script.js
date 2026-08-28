@@ -202,14 +202,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    
     function formatCurrency(num) {
         return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num) + ' ₺';
-
-function formatWithPercent(val, total) {
-    if (!total || total === 0) return formatCurrency(val) + " (%0.00)";
-    return formatCurrency(val) + ` (%${((val / total) * 100).toFixed(2)})`;
-}
     }
+    
+    function formatWithPercent(val, total) {
+        if (!total || total === 0) return formatCurrency(val) + " (%0.00)";
+        return formatCurrency(val) + ` (%${((val / total) * 100).toFixed(2)})`;
+    }
+
 
     function showToast(message) {
         let toast = document.getElementById('toast');
