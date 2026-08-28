@@ -843,20 +843,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row total">
                         <span>Şube Net Maliyeti:</span>
-                        <span>${formatCurrency(netTotal)}</span>
+                        <span>${formatWithPercent(netTotal, globalNetTotal)}</span>
                     </div>
                     <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);">
                           <span>Şube Net Kâr: <span class="chevron">▼</span></span>
-                          <span id="branch-net-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0)) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0))}</span>
+                          <span id="branch-net-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0)) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0), netTotal)}</span>
                       </div>
                       <div class="accordion-content">
                           <div class="result-row total" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%);">
                               <span>Şube Faaliyet Kârı:</span>
-                              <span id="branch-faaliyet-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)))}</span>
+                              <span id="branch-faaliyet-kar-${bIndex}" style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)), netTotal)}</span>
                           </div>
                           <div class="result-row total" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%);">
                               <span>Şube Brüt Kâr:</span>
-                              <span id="branch-brut-kar-${bIndex}" style="color: ${branch.branchTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchTotalProfit)}</span>
+                              <span id="branch-brut-kar-${bIndex}" style="color: ${branch.branchTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit, netTotal)}</span>
                           </div>
                       </div>
                 </div>
