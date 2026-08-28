@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const elBase = document.getElementById(`cls-bTotal-${cIndex}`);
             if(elBase) {
-                elBase.textContent = formatCurrency(cls.baseTotal);
+                elBase.textContent = formatWithPercent(cls.baseTotal, clsNet);
                 document.getElementById(`cls-share-${cIndex}`).textContent = formatWithPercent(clsShare, clsNet);
                 document.getElementById(`cls-labor-share-${cIndex}`).textContent = formatWithPercent(clsLaborShare, clsNet);
                   const elTotalLabor = document.getElementById(`cls-total-labor-${cIndex}`);
