@@ -769,7 +769,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     branchTotalRevenue += ((cls.quantity || 0) * (cls.salePrice || 0));
                 });
             }
-            const classCount = branch.subClasses.length;
 
             card.innerHTML = `
                 <button class="btn-delete-card" data-bindex="${bIndex}" title="Şubeyi Sil">
