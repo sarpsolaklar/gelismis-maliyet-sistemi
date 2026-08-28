@@ -1000,7 +1000,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="divider"></div>
 
                 <div class="branch-results">
-                    <div class="result-row">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
+                            <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, giderlerin <b>Sınıf Net Maliyeti</b> içerisindeki payını gösterir.
+                        </div>
+                        <div class="result-row">
                         <span>Sınıf Hammadde Toplamı:</span>
                         <span id="cls-bTotal-${cIndex}">0 ₺</span>
                     </div>
@@ -1067,7 +1070,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="divider"></div>
 
                 <div class="branch-results">
-                      <div class="result-row unit">
+                      <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
+                            <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, 1 adet makinenin kendi <b>Net Maliyeti</b> içerisindeki payını gösterir (Sınıf ile aynıdır).
+                        </div>
+                        <div class="result-row unit">
                           <span>1 Adet Makine Hammadde Toplamı:</span>
                           <span id="cls-unit-base-${cIndex}" style="color: var(--text-primary);">0 ₺</span>
                       </div>
