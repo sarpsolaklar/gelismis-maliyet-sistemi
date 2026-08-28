@@ -1567,6 +1567,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span>Fabrika Finansman (Gelir/Gider) Payı:</span>
                 <span style="color: ${totalFinansman < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(totalFinansman, netMaliyet)}</span>
             </div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Net Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100\'ü aşabilir.</div>
         `;
         
         document.getElementById('factorySummaryResults').innerHTML = html;
