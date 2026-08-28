@@ -1000,6 +1000,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="divider"></div>
 
                 <div class="branch-results">
+                    <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2);">
+                        <span>Sınıf Net Maliyeti:</span>
+                        <span id="cls-net-${cIndex}">0 ₺</span>
+                    </div>
+                      <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; margin-bottom: 0.5rem; opacity: 0.8; line-height: 1.4;">
+                          <i style="margin-right:4px;">ℹ</i>Kâr oranları, sınıfın kendi <b>Net Maliyeti</b> üzerinden kâr marjını gösterir.
+                      </div>
+                    <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); border-left-color: #8b5cf6; margin-top: 0.5rem;">
+                          <span>Sınıf Net Kâr: <span class="chevron">▼</span></span>
+                          <span id="cls-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
+                      </div>
+                      <div class="accordion-content">
+                          <div class="result-row total" style="background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); border-left-color: var(--accent-1); margin-top: 0.5rem;">
+                              <span>Sınıf Faaliyet Kârı:</span>
+                              <span id="cls-faaliyet-kar-${cIndex}">0 ₺</span>
+                          </div>
+                          <div class="result-row total" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); border-left-color: var(--success); margin-top: 0.5rem;">
+                              <span>Sınıf Brüt Kârı:</span>
+                              <span id="cls-total-profit-${cIndex}" style="color: var(--success);">0 ₺</span>
+                          </div>
+                      </div>
+                      <div style="margin-top: 1rem; margin-bottom: 1rem; height: 1px; background: var(--border-color); opacity: 0.5;"></div>
                     <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
                             <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, giderlerin <b>Sınıf Net Maliyeti</b> içerisindeki payını gösterir.
                         </div>
@@ -1047,29 +1069,33 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Sınıf Finansman (Gelir/Gider) Payı:</span>
                         <span id="cls-finansman-${cIndex}" style="color: var(--danger);">0 ₺</span>
                     </div>
-                    <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2);">
-                        <span>Sınıf Net Maliyeti:</span>
-                        <span id="cls-net-${cIndex}">0 ₺</span>
-                    </div>
-                    <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); border-left-color: #8b5cf6; margin-top: 0.5rem;">
-                          <span>Sınıf Net Kâr: <span class="chevron">▼</span></span>
-                          <span id="cls-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
-                      </div>
-                      <div class="accordion-content">
-                          <div class="result-row total" style="background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); border-left-color: var(--accent-1); margin-top: 0.5rem;">
-                              <span>Sınıf Faaliyet Kârı:</span>
-                              <span id="cls-faaliyet-kar-${cIndex}">0 ₺</span>
-                          </div>
-                          <div class="result-row total" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); border-left-color: var(--success); margin-top: 0.5rem;">
-                              <span>Sınıf Brüt Kârı:</span>
-                              <span id="cls-total-profit-${cIndex}" style="color: var(--success);">0 ₺</span>
-                          </div>
-                      </div>
                 </div>
 
                 <div class="divider"></div>
 
                 <div class="branch-results">
+                    <div class="result-row total" style="margin-top: 1rem; border-left-color: var(--accent-3); background: linear-gradient(90deg, rgba(244, 63, 94, 0.15) 0%, transparent 100%); flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+                        <span style="font-size: 0.95rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">1 Adet Makine Maliyeti</span>
+                        <span id="cls-unit-${cIndex}" style="font-size: 2rem; font-weight: 800; color: var(--text-primary);">0 ₺</span>
+                    </div>
+                      <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; margin-bottom: 0.5rem; opacity: 0.8; line-height: 1.4;">
+                          <i style="margin-right:4px;">ℹ</i>Kâr oranları, 1 adet makinenin kendi <b>Net Maliyeti</b> üzerinden kâr marjını gösterir.
+                      </div>
+                    <div class="result-row unit accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; font-size: 1.2rem;">
+                          <span>1 Adet Makine İçin Net Kâr: <span class="chevron">▼</span></span>
+                          <span id="cls-unit-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
+                      </div>
+                      <div class="accordion-content">
+                          <div class="result-row unit" style="margin-top: 0.5rem; font-size: 1.2rem;">
+                              <span>1 Adet Makine İçin Faaliyet Kârı:</span>
+                              <span id="cls-unit-faaliyet-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
+                          </div>
+                          <div class="result-row unit" style="margin-top: 0.5rem; font-size: 1.2rem;">
+                              <span>1 Adet Makine İçin Brüt Kâr:</span>
+                              <span id="cls-profit-${cIndex}" style="font-weight: 800;">0 ₺</span>
+                          </div>
+                      </div>
+                      <div style="margin-top: 1rem; margin-bottom: 1rem; height: 1px; background: var(--border-color); opacity: 0.5;"></div>
                       <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
                             <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, 1 adet makinenin kendi <b>Net Maliyeti</b> içerisindeki payını gösterir (Sınıf ile aynıdır).
                         </div>
@@ -1117,24 +1143,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>1 Adet Makine İçin Finansman (Gelir/Gider) Payı:</span>
                         <span id="cls-unit-finansman-${cIndex}" style="color: var(--danger);">0 ₺</span>
                     </div>
-                    <div class="result-row total" style="margin-top: 1rem; border-left-color: var(--accent-3); background: linear-gradient(90deg, rgba(244, 63, 94, 0.15) 0%, transparent 100%); flex-direction: column; align-items: flex-start; gap: 0.5rem;">
-                        <span style="font-size: 0.95rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">1 Adet Makine Maliyeti</span>
-                        <span id="cls-unit-${cIndex}" style="font-size: 2rem; font-weight: 800; color: var(--text-primary);">0 ₺</span>
-                    </div>
-                    <div class="result-row unit accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; font-size: 1.2rem;">
-                          <span>1 Adet Makine İçin Net Kâr: <span class="chevron">▼</span></span>
-                          <span id="cls-unit-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
-                      </div>
-                      <div class="accordion-content">
-                          <div class="result-row unit" style="margin-top: 0.5rem; font-size: 1.2rem;">
-                              <span>1 Adet Makine İçin Faaliyet Kârı:</span>
-                              <span id="cls-unit-faaliyet-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
-                          </div>
-                          <div class="result-row unit" style="margin-top: 0.5rem; font-size: 1.2rem;">
-                              <span>1 Adet Makine İçin Brüt Kâr:</span>
-                              <span id="cls-profit-${cIndex}" style="font-weight: 800;">0 ₺</span>
-                          </div>
-                      </div>
                 </div>
                 
                 <button class="btn-remove-class" data-cindex="${cIndex}">Sınıfı Sil</button>
