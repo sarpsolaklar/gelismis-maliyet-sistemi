@@ -1472,6 +1472,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalArge = 0;
         let totalFinansman = 0;
         let classCount = 0;
+        let brutKar = 0;
         
         branchData.forEach(branch => {
             totalHammadde += branch.branchBaseTotal || 0;
@@ -1483,14 +1484,14 @@ document.addEventListener('DOMContentLoaded', () => {
             totalArge += branch.branchArge || 0;
             totalFinansman += branch.branchFinansman || 0;
             classCount += branch.subClasses.length;
+            brutKar += branch.branchTotalProfit || 0;
         });
         
         const totalIscilik = totalEsitIscilik + totalDirektIscilik;
         const totalFaaliyet = totalPazarlama + totalYonetim + totalArge;
         const netMaliyet = globalNetTotal;
-        const netKar = globalTotalProfit - totalFaaliyet - totalFinansman;
-        const faaliyetKari = globalTotalProfit - totalFaaliyet;
-        const brutKar = globalTotalProfit;
+        const netKar = brutKar - totalFaaliyet - totalFinansman;
+        const faaliyetKari = brutKar - totalFaaliyet;
         
         const html = `
             <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2);">
