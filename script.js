@@ -1477,7 +1477,7 @@ function renderFactorySummary() {
     let totalFinansman = 0;
     let classCount = 0;
     
-    scenarioData[currentScenarioId].branches.forEach(branch => {
+    branchData.forEach(branch => {
         totalHammadde += branch.branchBaseTotal || 0;
         totalEsitIscilik += branch.branchShare || 0;
         totalDirektIscilik += branch.laborCost || 0;
