@@ -593,6 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         saveData();
         updateChart();
+        renderFactorySummary();
     }
 
     function calculateDetail() {
@@ -875,8 +876,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const bIndex = parseInt(e.target.getAttribute('data-bindex'));
                 branchData[bIndex].name = e.target.value;
                 saveData();
-                updateChart();
-            });
+        updateChart();
+        renderFactorySummary();
+    });
         });
 
         document.querySelectorAll('.branch-input.emp-input').forEach(input => {
