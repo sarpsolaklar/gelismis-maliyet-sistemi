@@ -808,11 +808,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       <div class="accordion-content">
                           <div class="result-row">
                               <span>Şube Eşit Dağıtılan İşçilik Payı:</span>
-                              <span id="branch-share-labor-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.branchShare, netTotal)}</span>
+                              <span id="branch-share-labor-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.branchShare, globalNetTotal)}</span>
                           </div>
                           <div class="result-row">
                               <span>Şube İşçilik Maliyeti:</span>
-                              <span id="branch-labor-cost-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.laborCost || 0, netTotal)}</span>
+                              <span id="branch-labor-cost-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.laborCost || 0, globalNetTotal)}</span>
                           </div>
                       </div>
                     <div class="result-row">
