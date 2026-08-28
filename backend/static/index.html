@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altıkod Mail Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>ALTIKOD</h1>
+                <span>DIGITAL SOLUTIONS</span>
+            </div>
+            <nav>
+                <a href="#" class="active"><i class="icon">📊</i> Dashboard</a>
+                <a href="#"><i class="icon">🚀</i> Kampanyalar</a>
+                <a href="#"><i class="icon">📄</i> Şablonlar</a>
+                <a href="#"><i class="icon">⚙️</i> Ayarlar</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h2>Toplu Gönderim Panosu</h2>
+                <div class="status-badge" id="statusBadge">Bağlanıyor...</div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-card glass-card">
+                    <h3>Gönderilen</h3>
+                    <div class="value success" id="sentCount">0</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <h3>Bekleyen</h3>
+                    <div class="value warning" id="pendingCount">0</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <h3>Hatalı</h3>
+                    <div class="value danger" id="failedCount">0</div>
+                </div>
+            </section>
+
+            <section class="controls glass-card">
+                <div class="action-panel">
+                    <div>
+                        <h3>Gönderimi Yönet</h3>
+                        <p>Sistem her 10 mailde bir 31 dakika bekleyerek otomatik ilerler.</p>
+                    </div>
+                    <div class="buttons">
+                        <button id="startBtn" class="btn btn-primary">Başlat</button>
+                        <button id="stopBtn" class="btn btn-danger" disabled>Durdur</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="logs glass-card">
+                <h3>Canlı Gönderim Kayıtları</h3>
+                <div class="log-container" id="logContainer">
+                    <!-- Logs will appear here -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

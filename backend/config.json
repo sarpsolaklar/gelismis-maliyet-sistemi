@@ -1,0 +1,17 @@
+{
+    "admin_user": "admin",
+    "admin_pass": "123456",
+    "subject": "Mağazanızda Bir Şey Eksik!",
+    "smtp_accounts": [
+        {
+            "smtp_server": "mail.altikodtech.com.tr",
+            "smtp_port": 465,
+            "smtp_email": "altikodtech",
+            "smtp_password": "eEJcK0FLjuuFsbk",
+            "sender_name": "Altıkod Digital Solutions",
+            "sender_email": "altikodtech@altikodtech.com.tr"
+        }
+    ],
+    "work_start_time": "09:00",
+    "work_end_time": "18:30"
+}

@@ -1,0 +1,122 @@
+[
+    {
+        "campaign_id": "camp_20260714100206",
+        "campaign_name": "devammm",
+        "date": "2026-07-14 14:45:47",
+        "file": "havuz_kampanya_20260714095549.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 91,
+        "total_failed": 8,
+        "pending": 278
+    },
+    {
+        "campaign_id": "camp_20260710113808",
+        "campaign_name": "şablon 1 devamı",
+        "date": "2026-07-10 11:41:10",
+        "file": "havuz_kampanya_20260710112954.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 0,
+        "total_failed": 0,
+        "pending": 369
+    },
+    {
+        "campaign_id": "camp_sch_20260710103908",
+        "campaign_name": "dnm",
+        "date": "2026-07-10 10:41:36",
+        "file": "havuz_kampanya_20260710103724.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 1,
+        "total_failed": 0,
+        "pending": 2
+    },
+    {
+        "campaign_id": "camp_sch_20260710103307",
+        "campaign_name": "deneme",
+        "date": "2026-07-10 10:33:16",
+        "file": "havuz_kampanya_20260710103216.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 2,
+        "total_failed": 0,
+        "pending": 1
+    },
+    {
+        "campaign_id": "camp_sch_20260708161706",
+        "campaign_name": "deneme",
+        "date": "2026-07-08 16:19:15",
+        "file": "havuz_kampanya_20260708161609.xlsx",
+        "template": "altikod-ucretsiz-deneme-eposta-sablonu.html",
+        "total_sent": 2,
+        "total_failed": 0,
+        "pending": 0
+    },
+    {
+        "campaign_id": "camp_sch_20260708155806",
+        "campaign_name": "deneme",
+        "date": "2026-07-08 16:00:14",
+        "file": "havuz_kampanya_20260708155700.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 2,
+        "total_failed": 0,
+        "pending": 0
+    },
+    {
+        "campaign_id": "camp_sch_20260708151308",
+        "campaign_name": "deneme",
+        "date": "2026-07-08 15:13:53",
+        "file": "havuz_kampanya_20260708151123.xlsx",
+        "template": "altikod-ucretsiz-deneme-eposta-sablonu.html",
+        "total_sent": 1,
+        "total_failed": 0,
+        "pending": 1
+    },
+    {
+        "campaign_id": "camp_sch_20260708151008",
+        "campaign_name": "deneme",
+        "date": "2026-07-08 15:11:10",
+        "file": "havuz_kampanya_20260708150950.xlsx",
+        "template": "altikod-ucretsiz-deneme-eposta-sablonu.html",
+        "total_sent": 1,
+        "total_failed": 0,
+        "pending": 1
+    },
+    {
+        "campaign_id": "camp_sch_20260708150908",
+        "campaign_name": "deneme",
+        "date": "2026-07-08 15:09:27",
+        "file": "havuz_kampanya_20260708150825.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 1,
+        "total_failed": 0,
+        "pending": 1
+    },
+    {
+        "campaign_id": "camp_sch_20260708145001",
+        "campaign_name": "deneme",
+        "date": "2026-07-08 14:50:05",
+        "file": "havuz_kampanya_20260708144745.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 1,
+        "total_failed": 0,
+        "pending": 1
+    },
+    {
+        "campaign_id": "camp_20260708144131",
+        "campaign_name": "deneme",
+        "date": "2026-07-08 14:41:36",
+        "file": "havuz_kampanya_20260708144107.xlsx",
+        "template": "altikod-chatbot-eposta-sablonu.html",
+        "total_sent": 1,
+        "total_failed": 0,
+        "pending": 1
+    },
+    {
+        "campaign_id": "camp_20260708132324",
+        "date": "2026-07-08 13:23:28",
+        "file": "havuz_kampanya_20260708132238.xlsx",
+        "template": "altikod-ucretsiz-deneme-eposta-sablonu.html",
+        "total_sent": 1,
+        "total_failed": 0,
+        "pending": 1,
+        "campaign_name": "Deneme"
+    }
+]
