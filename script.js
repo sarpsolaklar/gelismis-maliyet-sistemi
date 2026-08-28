@@ -1064,7 +1064,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="divider"></div>
 
                 <div class="branch-results">
-                    <div class="result-row unit accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
+                      <div class="result-row unit">
+                          <span>1 Adet Makine Hammadde Toplamı:</span>
+                          <span id="cls-unit-base-${cIndex}" style="color: var(--text-primary);">0 ₺</span>
+                      </div>
+                      <div class="result-row unit accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>1 Adet Makine İçin Toplam İşçilik Payı: <span class="chevron">▼</span></span>
                           <span id="cls-unit-total-labor-${cIndex}" style="color: var(--warning);">0 ₺</span>
                       </div>
