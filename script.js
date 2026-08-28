@@ -1524,20 +1524,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span>${formatWithPercent(totalHammadde, netMaliyet)}</span>
             </div>
             
-            <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
-                <span>Fabrika Toplam İşçilik Payı: <span class="chevron"> </span></span>
-                <span style="color: var(--warning);">${formatWithPercent(totalIscilik, netMaliyet)}</span>
+            <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="cursor: pointer;">
+            <span style="display: flex; align-items: center; gap: 8px;">Fabrika Toplam İşçilik Payı: <span class="chevron"></span></span>
+            <span style="color: var(--warning);">${formatWithPercent(totalIscilik, netMaliyet)}</span>
+        </div>
+        <div class="accordion-content">
+            <div class="result-row" style="padding-left: 1rem;">
+                <span>Fabrika Eşit Dağıtılan İşçilik Payı:</span>
+                <span style="color: var(--warning);">${formatWithPercent(totalEsitIscilik, netMaliyet)}</span>
             </div>
-            <div class="accordion-content">
-                <div class="result-row">
-                    <span>Fabrika Eşit Dağıtılan İşçilik Payı:</span>
-                    <span style="color: var(--warning);">${formatWithPercent(totalEsitIscilik, netMaliyet)}</span>
-                </div>
-                <div class="result-row">
-                    <span>Fabrika Direkt İşçilik Maliyeti:</span>
-                    <span style="color: var(--warning);">${formatWithPercent(totalDirektIscilik, netMaliyet)}</span>
-                </div>
+            <div class="result-row" style="padding-left: 1rem;">
+                <span>Fabrika Direkt İşçilik Maliyeti:</span>
+                <span style="color: var(--warning);">${formatWithPercent(totalDirektIscilik, netMaliyet)}</span>
             </div>
+        </div>
             
             <div class="result-row">
                 <span>Fabrika Toplam Genel Üretim Gideri Payı:</span>
