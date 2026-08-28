@@ -631,13 +631,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const elBase = document.getElementById(`cls-bTotal-${cIndex}`);
             if(elBase) {
                 elBase.textContent = formatCurrency(cls.baseTotal);
-                document.getElementById(`cls-share-${cIndex}`).textContent = formatCurrency(clsShare);
-                document.getElementById(`cls-labor-share-${cIndex}`).textContent = formatCurrency(clsLaborShare);
+                document.getElementById(`cls-share-${cIndex}`).textContent = formatWithPercent(clsShare, clsNet);
+                document.getElementById(`cls-labor-share-${cIndex}`).textContent = formatWithPercent(clsLaborShare, clsNet);
                   const elTotalLabor = document.getElementById(`cls-total-labor-${cIndex}`);
-                  if (elTotalLabor) elTotalLabor.textContent = formatCurrency(clsShare + clsLaborShare);
-                document.getElementById(`cls-gug-${cIndex}`).textContent = formatCurrency(clsGUG);
+                  if (elTotalLabor) elTotalLabor.textContent = formatWithPercent(clsShare + clsLaborShare, clsNet);
+                document.getElementById(`cls-gug-${cIndex}`).textContent = formatWithPercent(clsGUG, clsNet);
                 const elClsPaz = document.getElementById(`cls-paz-${cIndex}`);
-                if (elClsPaz) elClsPaz.textContent = formatCurrency(clsPazarlama);
+                if (elClsPaz) elClsPaz.textContent = formatWithPercent(clsPazarlama, clsNet);
                 const elClsYonetim = document.getElementById(`cls-yonetim-${cIndex}`);
                 if (elClsYonetim) elClsYonetim.textContent = formatCurrency(clsYonetim);
                 const elClsArge = document.getElementById(`cls-arge-${cIndex}`);
@@ -671,17 +671,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 const elUnitShare = document.getElementById(`cls-unit-share-${cIndex}`);
-                if (elUnitShare) elUnitShare.textContent = formatCurrency(clsUnitShare);
+                if (elUnitShare) elUnitShare.textContent = formatWithPercent(clsUnitShare, clsUnitCost);
                 
                 const elUnitLaborShare = document.getElementById(`cls-unit-labor-share-${cIndex}`);
-                if (elUnitLaborShare) elUnitLaborShare.textContent = formatCurrency(clsUnitLaborShare);
+                if (elUnitLaborShare) elUnitLaborShare.textContent = formatWithPercent(clsUnitLaborShare, clsUnitCost);
                   const elUnitTotalLabor = document.getElementById(`cls-unit-total-labor-${cIndex}`);
-                  if (elUnitTotalLabor) elUnitTotalLabor.textContent = formatCurrency(clsUnitShare + clsUnitLaborShare);
+                  if (elUnitTotalLabor) elUnitTotalLabor.textContent = formatWithPercent(clsUnitShare + clsUnitLaborShare, clsUnitCost);
                 
                 const elUnitGug = document.getElementById(`cls-unit-gug-${cIndex}`);
                 if (elUnitGug) elUnitGug.textContent = formatCurrency(clsUnitGUG);
                 const elUnitPaz = document.getElementById(`cls-unit-paz-${cIndex}`);
-                if (elUnitPaz) elUnitPaz.textContent = formatCurrency(clsUnitPazarlama);
+                if (elUnitPaz) elUnitPaz.textContent = formatWithPercent(clsUnitPazarlama, clsUnitCost);
                 const elUnitYonetim = document.getElementById(`cls-unit-yonetim-${cIndex}`);
                 if (elUnitYonetim) elUnitYonetim.textContent = formatCurrency(clsUnitYonetim);
                 const elUnitArge = document.getElementById(`cls-unit-arge-${cIndex}`);
@@ -789,21 +789,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>Şube Toplam İşçilik Payı: <span class="chevron">▼</span></span>
-                          <span id="branch-total-labor-${bIndex}" style="color: var(--warning);">${formatCurrency(branch.branchShare + (branch.laborCost || 0))}</span>
+                          <span id="branch-total-labor-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.branchShare + (branch.laborCost || 0), netTotal)}</span>
                       </div>
                       <div class="accordion-content">
                           <div class="result-row">
                               <span>Şube Eşit Dağıtılan İşçilik Payı:</span>
-                              <span id="branch-share-labor-${bIndex}" style="color: var(--warning);">${formatCurrency(branch.branchShare)}</span>
+                              <span id="branch-share-labor-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.branchShare, netTotal)}</span>
                           </div>
                           <div class="result-row">
                               <span>Şube İşçilik Maliyeti:</span>
-                              <span id="branch-labor-cost-${bIndex}" style="color: var(--warning);">${formatCurrency(branch.laborCost || 0)}</span>
+                              <span id="branch-labor-cost-${bIndex}" style="color: var(--warning);">${formatWithPercent(branch.laborCost || 0, netTotal)}</span>
                           </div>
                       </div>
                     <div class="result-row">
                         <span>Şube Toplam Genel Üretim Gideri Payı:</span>
-                        <span style="color: var(--accent-4);">${formatCurrency(branch.branchGUG)}</span>
+                        <span style="color: var(--accent-4);">${formatWithPercent(branch.branchGUG, netTotal)}</span>
                     </div>
                     <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')">
                           <span>Şube Toplam Faaliyet Gideri Payı: <span class="chevron">▼</span></span>
@@ -820,12 +820,12 @@ document.addEventListener('DOMContentLoaded', () => {
                           </div>
                           <div class="result-row">
                               <span>Şube Toplam AR-GE Gideri Payı:</span>
-                              <span style="color: var(--accent-1);">${formatCurrency(branch.branchArge || 0)}</span>
+                              <span style="color: var(--accent-1);">${formatWithPercent(branch.branchArge || 0, netTotal)}</span>
                           </div>
                       </div>
                       <div class="result-row">
                         <span>Şube Finansman (Gelir/Gider) Payı:</span>
-                        <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatCurrency(branch.branchFinansman || 0)}</span>
+                        <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchFinansman || 0, netTotal)}</span>
                     </div>
                     <div class="result-row total">
                         <span>Şube Net Maliyeti:</span>
