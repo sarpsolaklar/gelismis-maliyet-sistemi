@@ -290,6 +290,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (savedScenarios) {
             scenarios = JSON.parse(savedScenarios);
+            // MIGRATION: Rename old Varsayılan to Ocak 2026
+            if (scenarios['Varsayılan']) {
+                scenarios['Ocak 2026'] = scenarios['Varsayılan'];
+                delete scenarios['Varsayılan'];
+                localStorage.setItem('celmakScenarios', JSON.stringify(scenarios));
+            }
         } else {
             // Migration from old app version if exists
             const oldData = localStorage.getItem('branchDataDrillDown');
