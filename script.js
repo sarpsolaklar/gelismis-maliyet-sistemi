@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 branchBaseTotal: 0,
                 branchShare: 0,
                 subClasses: [
-                    { name: "Tamburlu Çayır Biçme", quantity: 1, machineCost: 0, salePrice: 0 }
+                    { name: "Tamburlu Çayır Biçme", quantity: 1, baseTotal: 0, salePrice: 0 }
                 ]
             }
         ];
