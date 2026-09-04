@@ -388,7 +388,27 @@ if (currentScenarioId === 'Varsayılan') {
             saveData(); // Save old scenario before switching
             
             // Mevcut ayın/dönemin verilerini (şubeler, sınıflar, maliyetler) birebir kopyala
-            scenarios[name] = JSON.parse(JSON.stringify(scenarios[currentScenarioId]));
+            let cloned = JSON.parse(JSON.stringify(scenarios[currentScenarioId]));
+            // 1. Seçeneğe göre: Yeni ayda giderleri ve adetleri sıfırla, hammadde ve satış fiyatını koru
+            cloned.sharedExpense = 0;
+            cloned.globalGUG = 0;
+            cloned.globalPazarlama = 0;
+            cloned.globalYonetim = 0;
+            cloned.globalArge = 0;
+            cloned.globalFinansman = 0;
+            
+            if (cloned.branchData) {
+                cloned.branchData.forEach(branch => {
+                    branch.labor = 0; // Şube İşçilik
+                    if (branch.subClasses) {
+                        branch.subClasses.forEach(cls => {
+                            cls.quantity = 0; // Satış Adedi sıfırla
+                            // cls.baseTotal (Hammadde) ve cls.salePrice (Satış Fiyatı) korunur
+                        });
+                    }
+                });
+            }
+            scenarios[name] = cloned;
             currentScenarioId = name;
             saveData(); // Save new scenario
             
