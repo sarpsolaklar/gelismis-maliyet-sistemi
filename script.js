@@ -410,7 +410,10 @@ if (currentScenarioId === 'Varsayılan') {
             }
             scenarios[name] = cloned;
             currentScenarioId = name;
-            saveData(); // Save new scenario
+            
+            // Veriyi bozmamak icin DOM'dan ceken saveData() yerine direkt kayit atiyoruz:
+            localStorage.setItem('celmakScenarios', JSON.stringify(scenarios));
+            localStorage.setItem('celmakCurrentScenario', currentScenarioId);
             
             updateScenarioUI();
             loadCurrentScenario();
