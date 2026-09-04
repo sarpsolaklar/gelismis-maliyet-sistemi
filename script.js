@@ -421,6 +421,34 @@ if (currentScenarioId === 'Varsayılan') {
         }
     });
 
+    
+    const btnRenameScenario = document.getElementById('btnRenameScenario');
+    if (btnRenameScenario) {
+        btnRenameScenario.addEventListener('click', () => {
+            const newName = prompt("Dönemin yeni adını girin:", currentScenarioId);
+            if (newName && newName.trim() !== "" && newName !== currentScenarioId) {
+                if (scenarios[newName]) {
+                    alert("Bu isimde bir dönem zaten var!");
+                    return;
+                }
+                // Save current data first
+                saveData();
+                
+                // Copy to new key and delete old key
+                scenarios[newName] = scenarios[currentScenarioId];
+                delete scenarios[currentScenarioId];
+                
+                currentScenarioId = newName;
+                
+                localStorage.setItem('celmakScenarios', JSON.stringify(scenarios));
+                localStorage.setItem('celmakCurrentScenario', currentScenarioId);
+                
+                updateScenarioUI();
+                showToast("Dönem Adı Güncellendi!");
+            }
+        });
+    }
+
     const btnDeleteScenario = document.getElementById('btnDeleteScenario');
     if (btnDeleteScenario) {
         btnDeleteScenario.addEventListener('click', () => {
