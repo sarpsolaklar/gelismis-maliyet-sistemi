@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // State Variables
     let scenarios = {};
-    let currentScenarioId = 'Varsayılan';
+    let currentScenarioId = 'Ocak 2026';
     let branchData = [];
     let currentBranchIndex = null;
     let costChartInstance = null;
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const oldExpense = localStorage.getItem('sharedExpense') || 720;
             
             scenarios = {
-                "Varsayılan": {
+                "Ocak 2026": {
                     sharedExpense: oldExpense,
                     branchData: oldData ? JSON.parse(oldData) : generateDefaultBranch()
                 }
@@ -365,28 +365,26 @@ document.addEventListener('DOMContentLoaded', () => {
         currentScenarioId = e.target.value; // Switch ID
         localStorage.setItem('celmakCurrentScenario', currentScenarioId);
         loadCurrentScenario(); // Load NEW scenario state
-        showToast("Senaryo Yüklendi: " + currentScenarioId);
+        showToast("Dönem Yüklendi: " + currentScenarioId);
     });
 
     btnNewScenario.addEventListener('click', () => {
-        const name = prompt("Yeni senaryo/proje adı girin:");
+        const name = prompt("Yeni eklenecek ay/dönem adını girin (Örn: Şubat 2026):");
         if (name && name.trim() !== "") {
             if (scenarios[name]) {
-                alert("Bu isimde bir senaryo zaten var!");
+                alert("Bu isimde bir dönem zaten var!");
                 return;
             }
             saveData(); // Save old scenario before switching
             
-            scenarios[name] = {
-                sharedExpense: 720,
-                branchData: generateDefaultBranch()
-            };
+            // Mevcut ayın/dönemin verilerini (şubeler, sınıflar, maliyetler) birebir kopyala
+            scenarios[name] = JSON.parse(JSON.stringify(scenarios[currentScenarioId]));
             currentScenarioId = name;
             saveData(); // Save new scenario
             
             updateScenarioUI();
             loadCurrentScenario();
-            showToast("Yeni Senaryo Oluşturuldu!");
+            showToast("Yeni Dönem Oluşturuldu!");
         }
     });
 
@@ -394,10 +392,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnDeleteScenario) {
         btnDeleteScenario.addEventListener('click', () => {
             if (Object.keys(scenarios).length <= 1) {
-                alert("Sistemde en az 1 senaryo bulunmalıdır. Bu senaryoyu silemezsiniz.");
+                alert("Sistemde en az 1 dönem bulunmalıdır. Bu dönemi silemezsiniz.");
                 return;
             }
-            if (confirm(`'${currentScenarioId}' senaryosunu kalıcı olarak silmek istediğinize emin misiniz?`)) {
+            if (confirm(`'${currentScenarioId}' dönemini kalıcı olarak silmek istediğinize emin misiniz?`)) {
                 delete scenarios[currentScenarioId]; // Delete from memory
                 currentScenarioId = Object.keys(scenarios)[0]; // Pick another existing one
                 
