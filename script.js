@@ -304,6 +304,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         currentScenarioId = localStorage.getItem('celmakCurrentScenario') || Object.keys(scenarios)[0];
+if (currentScenarioId === 'Varsayılan') {
+    currentScenarioId = 'Ocak 2026';
+    localStorage.setItem('celmakCurrentScenario', currentScenarioId);
+}
         if (!scenarios[currentScenarioId]) currentScenarioId = Object.keys(scenarios)[0];
 
         updateScenarioUI();

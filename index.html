@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="script.js?v=127" defer></script>
+    <script src="script.js?v=128" defer></script>
     <script>
     window.onerror = function(msg, url, line, col, error) {
        const d = document.createElement('div');
@@ -63,10 +63,10 @@
                     <div class="scenario-controls">
                         <select id="scenarioSelector" class="scenario-select"></select>
                         <button id="btnNewScenario" class="btn-scenario-add" title="Yeni Dönem Ekle (Mevcut Veriyi Kopyalar)">+</button>
-                        <button id="btnDeleteScenario" class="btn-scenario-del" title="Mevcut Dönemi Sil">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                        </button>
-                        <button id="btnCompareScenarios" class="btn-scenario-add" style="background: var(--accent-1); margin-left: 1rem;" title="Dönemleri Kıyasla">Kıyasla</button>
+                    <button id="btnDeleteScenario" class="btn-scenario-delete" title="Mevcut Dönemi Sil">
+                        <svg xmlns="http://www.w3.org/.svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>
+                    </button>
+                    <button id="btnCompareScenarios" class="btn-scenario-add" style="background: var(--accent-1); margin-left: 1rem;" title="Dönemleri Kıyasla">Ayları Kıyasla</button>
                     </div>
                 </div>
             </header>
