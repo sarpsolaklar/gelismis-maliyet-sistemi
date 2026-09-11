@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 branchBaseTotal: 0,
                 branchShare: 0,
                 subClasses: [
-                    { name: "Tamburlu Çayır Biçme", quantity: 1, baseTotal: 0, salePrice: 0 }
+                    { name: "Tamburlu Çayır Biçme", quantity: 1, machineCost: 0, salePrice: 0 }
                 ]
             }
         ];
@@ -544,7 +544,7 @@ if (currentScenarioId === 'Varsayılan') {
                 let rate = 1;
                 if (cls.currency === 'USD') rate = 34.50;
                 else if (cls.currency === 'EUR') rate = 38.20;
-                cls.baseTotal = cls.machineCost * rate * cls.quantity; 
+                cls.baseTotal = (parseFloat(cls.machineCost) || 0) * rate * (parseFloat(cls.quantity) || 0); 
                 bTotal += cls.baseTotal;
                 mCount += cls.quantity;
             });
@@ -1043,7 +1043,7 @@ if (currentScenarioId === 'Varsayılan') {
                     </div>
                     <div class="input-group">
                         <label>Hammadde (₺)</label>
-                        <input type="number" data-cindex="${cIndex}" class="class-input cost-input" value="${cls.machineCost}" min="0">
+                        <input type="number" data-cindex="${cIndex}" class="class-input cost-input" value="${cls.machineCost || 0}" min="0">
                     </div>
                     <div class="input-group">
                         <label>Satış Fiyatı (₺)</label>
