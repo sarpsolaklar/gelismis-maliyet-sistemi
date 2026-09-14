@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="script.js?v=142" defer></script>
+    <script src="script.js?v=145" defer></script>
     <script>
     window.onerror = function(msg, url, line, col, error) {
        const d = document.createElement('div');
@@ -231,13 +231,13 @@
         <div class="comparison-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
             <div class="glass-card" style="padding: 2rem;">
                 <h2 style="margin-bottom: 1rem; color: var(--accent-1);">Dönem A</h2>
-                <select id="compareSelectA" class="class-input" style="width: 100%; margin-bottom: 2rem;"></select>
+                <div id="compareListA" class="compare-checkbox-list" style="max-height: 150px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 10px; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 8px;"></div>
                 <div id="compareResultsA"></div>
             </div>
             
             <div class="glass-card" style="padding: 2rem;">
                 <h2 style="margin-bottom: 1rem; color: var(--accent-2);">Dönem B</h2>
-                <select id="compareSelectB" class="class-input" style="width: 100%; margin-bottom: 2rem;"></select>
+                <div id="compareListB" class="compare-checkbox-list" style="max-height: 150px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 10px; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 8px;"></div>
                 <div id="compareResultsB"></div>
             </div>
         </div>
