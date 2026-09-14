@@ -723,6 +723,10 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
                     elClsNetKar.style.color = netKari >= 0 ? "var(--success)" : "var(--danger)";
                 }
                 document.getElementById(`cls-net-${cIndex}`).textContent = formatCurrency(clsNet);
+                const elClsCogs = document.getElementById(`cls-cogs-${cIndex}`);
+                if (elClsCogs) {
+                    elClsCogs.textContent = formatCurrency(cls.baseTotal + clsShare + clsLaborShare + clsGUG);
+                }
                 const elClsRevenue = document.getElementById(`cls-revenue-${cIndex}`);
                 if (elClsRevenue) {
                     elClsRevenue.textContent = formatCurrency((cls.quantity || 0) * (cls.salePrice || 0));
@@ -1111,9 +1115,6 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
                           </div>
                       </div>
                       <div style="margin-top: 1rem; margin-bottom: 1rem; height: 1px; background: var(--border-color); opacity: 0.5;"></div>
-                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
-                            <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, giderlerin <b>Sınıf Net Maliyeti</b> içerisindeki payını gösterir.
-                        </div>
                         <div class="result-row">
                         <span>Sınıf Hammadde Toplamı:</span>
                         <span id="cls-bTotal-${cIndex}">0 ₺</span>
