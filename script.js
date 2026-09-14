@@ -1736,6 +1736,21 @@ if (currentScenarioId === 'Varsayılan') {
                 </div>
             </div>
 
+            <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Fabrika Net Kârı: <span class="chevron">▼</span></span>
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <span style="color: ${netKar >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(netKar, netMaliyet)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netKarText})</span>
+                </div>
+            </div>
+            <div class="accordion-content active">
+                <div class="result-row" style="padding-left: 1rem;">
+                    <span>Fabrika Finansman (Gelir/Gider) Payı:</span>
+                    <span style="color: ${totalFinansman < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(totalFinansman, netMaliyet)}</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Net Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100\'ü aşabilir.</div>
+            </div>
+
             <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start; margin-top: 1rem;">
                 <span style="margin-top: 4px;">Fabrika Net Maliyeti:</span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
@@ -1743,20 +1758,6 @@ if (currentScenarioId === 'Varsayılan') {
                     <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netMaliyetText})</span>
                 </div>
             </div>
-            
-            <div class="result-row total" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start;">
-                <span style="margin-top: 4px;">Fabrika Net Kârı:</span>
-                <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                    <span style="color: ${netKar >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(netKar, netMaliyet)}</span>
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netKarText})</span>
-                </div>
-            </div>
-            
-            <div class="result-row" style="margin-top: 1rem;">
-                <span>Fabrika Finansman (Gelir/Gider) Payı:</span>
-                <span style="color: ${totalFinansman < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(totalFinansman, netMaliyet)}</span>
-            </div>
-            <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Net Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100\'ü aşabilir.</div>
         `;
 
         document.getElementById('factorySummaryResults').innerHTML = html;
