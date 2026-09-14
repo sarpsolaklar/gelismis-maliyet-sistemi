@@ -1575,7 +1575,7 @@ if (currentScenarioId === 'Varsayılan') {
                 if (key === currentScenarioId) cbA.checked = true;
                 cbA.addEventListener('change', updateComparison);
                 lblA.appendChild(cbA);
-                lblA.appendChild(document.createTextNode(' ' + s.name));
+                lblA.appendChild(document.createTextNode(' ' + key));
                 listA.appendChild(lblA);
 
                 // For B
@@ -1586,7 +1586,7 @@ if (currentScenarioId === 'Varsayılan') {
                 if (key === bKey) cbB.checked = true;
                 cbB.addEventListener('change', updateComparison);
                 lblB.appendChild(cbB);
-                lblB.appendChild(document.createTextNode(' ' + s.name));
+                lblB.appendChild(document.createTextNode(' ' + key));
                 listB.appendChild(lblB);
             });
 
