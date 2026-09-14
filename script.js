@@ -1476,7 +1476,10 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
         const netKar = brutKar - totalFaaliyet - totalFinansman;
         const faaliyetKari = brutKar - totalFaaliyet;
 
+        
+        const smm = totalHammadde + totalIscilik + totalGUG;
         const currentTotals = {
+            smm, 
             totalCiro, brutKar, totalHammadde, totalIscilik, totalEsitIscilik, 
             totalDirektIscilik, totalGUG, totalPazarlama, totalYonetim, 
             totalArge, totalFinansman, faaliyetKari, netKar, netMaliyet
@@ -1509,6 +1512,10 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                 </div>
             </div>
             <div class="accordion-content">
+                <div class="result-row" style="padding-left: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <span style="font-weight: 600; color: var(--danger);">Satılan Malın Maliyeti (SMM):</span>
+                    <span style="font-weight: 600; color: var(--danger); display: flex; align-items: center;">${formatCurrency(smm)} ${varHtml('smm', true)}</span>
+                </div>
                 <div class="result-row" style="padding-left: 1rem;">
                     <span>Hammadde Toplamı:</span>
                     <span style="display: flex; align-items: center;">${formatWithPercent(totalHammadde, netMaliyet)} ${varHtml('totalHammadde', true)}</span>
