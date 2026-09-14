@@ -627,7 +627,9 @@ if (currentScenarioId === 'Varsayılan') {
         const elEmp = document.getElementById('totalEmployeeCount');
         if (elEmp) elEmp.textContent = branchData.length + ' Şube';
         
-        const globalNetTotal = globalBase + globalLabor + globalExpense + totalGUG + totalPazarlama + totalYonetim + totalArge; window.globalNetTotal = globalNetTotal;
+        const globalNetTotal = globalBase + globalLabor + globalExpense + totalGUG + totalPazarlama + totalYonetim + totalArge; 
+window.globalNetTotal = globalNetTotal;
+window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, totalPazarlama, totalYonetim, totalArge, totalFinansman };
         const globalNetProfit = globalTotalSales - (globalNetTotal - totalPazarlama - totalYonetim - totalArge);
         
         // Update the new branch summary widgets
