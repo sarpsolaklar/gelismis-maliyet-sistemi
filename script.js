@@ -1442,7 +1442,7 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                     const laborMultiplier = detailBase > 0 ? ((branch.laborCost || 0) / detailBase) : 0;
                     
                     branch.subClasses.forEach(cls => {
-                        if (branchFilter !== 'ALL' && cls.name !== branchFilter) return;
+                        if (branchFilter !== 'ALL' && !branchFilter.includes(cls.name)) return;
 
                         totalHammadde += cls.baseTotal || 0;
                         const clsShare = (cls.baseTotal || 0) * detailMultiplier;
@@ -1586,16 +1586,17 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
     function updateComparison() {
         const listA = document.getElementById('compareListA');
         const listB = document.getElementById('compareListB');
-        const branchSelect = document.getElementById('compareBranchSelect');
+        const classList = document.getElementById('compareClassList');
         
         if (!listA || !listB) return;
         
         const selectedA = Array.from(listA.querySelectorAll('input:checked')).map(cb => cb.value);
         const selectedB = Array.from(listB.querySelectorAll('input:checked')).map(cb => cb.value);
-        const branchFilter = branchSelect ? branchSelect.value : 'ALL';
+        const selectedClasses = classList ? Array.from(classList.querySelectorAll('input:checked')).map(cb => cb.value) : [];
+        const classFilter = selectedClasses.length > 0 ? selectedClasses : 'ALL';
         
-        const totalsA = renderCompareResults(selectedA, compareResultsA, branchFilter, null);
-        renderCompareResults(selectedB, compareResultsB, branchFilter, totalsA);
+        const totalsA = renderCompareResults(selectedA, compareResultsA, classFilter, null);
+        renderCompareResults(selectedB, compareResultsB, classFilter, totalsA);
     }
 
     if (btnCompareScenarios) {
@@ -1605,10 +1606,10 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
             comparisonView.classList.add('active');
 
             
-            const branchSelect = document.getElementById('compareBranchSelect');
-            if (branchSelect) {
-                const currentSelection = branchSelect.value;
-                branchSelect.innerHTML = '<option value="ALL">Tüm Fabrika (Genel Özet)</option>';
+            const classList = document.getElementById('compareClassList');
+            if (classList) {
+                const checkedBefore = Array.from(classList.querySelectorAll('input:checked')).map(cb => cb.value);
+                classList.innerHTML = '';
                 const uniqueClasses = new Set();
                 Object.values(scenarios).forEach(s => {
                     if (s.branchData) {
@@ -1620,14 +1621,16 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                     }
                 });
                 Array.from(uniqueClasses).sort().forEach(cName => {
-                    const opt = document.createElement('option');
-                    opt.value = cName;
-                    opt.textContent = cName;
-                    branchSelect.appendChild(opt);
+                    const lbl = document.createElement('label');
+                    const cb = document.createElement('input');
+                    cb.type = 'checkbox';
+                    cb.value = cName;
+                    if (checkedBefore.includes(cName)) cb.checked = true;
+                    cb.addEventListener('change', updateComparison);
+                    lbl.appendChild(cb);
+                    lbl.appendChild(document.createTextNode(' ' + cName));
+                    classList.appendChild(lbl);
                 });
-                if (uniqueClasses.has(currentSelection)) {
-                    branchSelect.value = currentSelection;
-                }
             }
             const listA = document.getElementById('compareListA');
             const listB = document.getElementById('compareListB');
@@ -1664,9 +1667,7 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
             });
 
             updateComparison();
-        if (document.getElementById('compareBranchSelect')) {
-            document.getElementById('compareBranchSelect').addEventListener('change', updateComparison);
-        }
+        
 
         });
 
