@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import html2pdf from 'html2pdf.js';
 
 const API_BASE = 'http://localhost:8000/api';
 
@@ -48,6 +49,33 @@ function App() {
   const [aiPrompt, setAiPrompt] = useState('');
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  
+  const [manualSend, setManualSend] = useState({ email: '', marka: '', site: '', template: '' });
+
+  const sendManualEmail = async (e) => {
+    e.preventDefault();
+    if (!manualSend.email || !manualSend.template) {
+      toast.error("Lütfen E-posta ve Şablon alanlarını doldurun.");
+      return;
+    }
+    const t = toast.loading("Gönderiliyor...");
+    try {
+      const res = await fetch(`${API_BASE}/send_manual`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify(manualSend)
+      });
+      if (res.ok) {
+        toast.success("Başarıyla gönderildi!", { id: t });
+        setManualSend({ email: '', marka: '', site: '', template: manualSend.template });
+      } else {
+        const data = await res.json();
+        toast.error(data.detail || "Gönderim başarısız.", { id: t });
+      }
+    } catch (err) {
+      toast.error("Ağ hatası.", { id: t });
+    }
+  };
   
   const fileInputRef = useRef(null);
   const templateInputRef = useRef(null);
@@ -439,18 +467,28 @@ function App() {
   };
 
   const selectTemplate = async (tmpl) => {
-    await fetch(`${API_BASE}/templates/select`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({ template: tmpl })
-    });
-    setStatus({...status, active_template: tmpl});
-    
-    // Auto-check spam when selected
-    const res = await fetch(`${API_BASE}/templates/preview?template=${tmpl}`, { headers: { 'Authorization': `Bearer ${token}` } });
-    if(res.ok) {
-      const data = await res.json();
-      checkSpamScore(data.html);
+    try {
+      const res = await fetch(`${API_BASE}/templates/select`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ template: tmpl })
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        toast.error(err.detail || "Şablon seçilirken sunucu hatası");
+        return;
+      }
+      setStatus({...status, active_template: tmpl});
+      toast.success(`${tmpl} aktif şablon olarak ayarlandı.`);
+      
+      // Auto-check spam when selected
+      const resPreview = await fetch(`${API_BASE}/templates/preview?template=${tmpl}`, { headers: { 'Authorization': `Bearer ${token}` } });
+      if(resPreview.ok) {
+        const data = await resPreview.json();
+        checkSpamScore(data.html);
+      }
+    } catch (e) {
+      toast.error(`Şablon seçme hatası: ${e.message}`);
     }
   };
 
@@ -478,6 +516,30 @@ function App() {
     if(res.ok) {
       toast.success("Şablon silindi.");
       fetchTemplates();
+    }
+  };
+
+  const downloadTemplatePDF = async (tmpl) => {
+    const t = toast.loading("PDF hazırlanıyor...");
+    try {
+      const res = await fetch(`${API_BASE}/templates/preview?template=${tmpl}`, { headers: { 'Authorization': `Bearer ${token}` } });
+      if (res.ok) {
+        const data = await res.json();
+        const element = document.createElement('div');
+        element.innerHTML = data.html;
+        const opt = {
+          margin:       0.5,
+          filename:     `${tmpl}.pdf`,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true },
+          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().from(element).set(opt).save().then(() => toast.success("PDF İndirildi!", {id: t}));
+      } else {
+        toast.error("Şablon yüklenemedi.", {id: t});
+      }
+    } catch(e) {
+      toast.error("PDF oluşturma hatası.", {id: t});
     }
   };
 
@@ -590,25 +652,36 @@ function App() {
 
   const toggleAll = async (cancelAll) => {
     if(status.is_running) return;
-    alert("Bu işlem biraz sürebilir, lütfen bekleyin...");
+    alert("Toplu işlem yapılıyor, lütfen bekleyin...");
     const targetStatus = cancelAll ? 'İptal' : '';
     
+    const updates = [];
     for (let contact of filteredContacts) {
       if (contact.status === 'Gönderildi') continue;
       if (contact.status !== targetStatus) {
-         const res = await fetch(`${API_BASE}/contacts/update`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-          body: JSON.stringify({ id: contact.id, status: targetStatus })
-        });
-        if(!res.ok) {
-           toast.error("Bazı kişiler güncellenemedi.");
-           break;
-        }
+         updates.push({ id: contact.id, status: targetStatus });
       }
     }
-    fetchContacts();
-    toast.success("Toplu işlem tamamlandı.");
+    
+    if (updates.length > 0) {
+      try {
+        const res = await fetch(`${API_BASE}/contacts/update_bulk`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ updates })
+        });
+        if (!res.ok) {
+           toast.error("Bazı kişiler güncellenemedi.");
+        } else {
+           toast.success("Toplu işlem tamamlandı.");
+           fetchContacts();
+        }
+      } catch (e) {
+        toast.error("Toplu işlem sırasında hata oluştu.");
+      }
+    } else {
+      toast.success("Değiştirilecek kişi bulunamadı.");
+    }
   };
 
   if (!token) {
@@ -673,6 +746,9 @@ function App() {
           </button>
           <button className={`nav-item ${activeTab === 'blacklist' ? 'active' : ''}`} onClick={() => setActiveTab('blacklist')} style={{color: activeTab === 'blacklist' ? 'white' : 'var(--danger-color)'}}>
             <span style={{fontSize: '1.2rem'}}>🚫</span> Kara Liste
+          </button>
+          <button className={`nav-item ${activeTab === 'manual_send' ? 'active' : ''}`} onClick={() => setActiveTab('manual_send')}>
+            <span style={{fontSize: '1.2rem'}}>📨</span> Manuel Gönderim
           </button>
           <button className={`nav-item ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')}>
             <span style={{fontSize: '1.2rem'}}>⚙️</span> Ayarlar
@@ -970,6 +1046,8 @@ function App() {
                       <span style={{wordBreak: 'break-all', fontSize: '13px'}}>{t}</span>
                       <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'flex-end'}}>
                         <button className="btn" style={{padding: '6px', fontSize: '12px', background: 'rgba(255,255,255,0.1)', color: 'white'}} onClick={() => renameTemplate(t)} title="Yeniden Adlandır">✏️</button>
+                        <button className="btn" style={{padding: '6px', fontSize: '12px', background: 'rgba(255,255,255,0.1)', color: 'white'}} onClick={() => window.open(`${API_BASE}/templates/download?template=${t}`, '_blank')} title="HTML İndir">📥</button>
+                        <button className="btn" style={{padding: '6px', fontSize: '12px', background: 'rgba(255,255,255,0.1)', color: 'white'}} onClick={() => downloadTemplatePDF(t)} title="PDF İndir">📄</button>
                         <button className="btn" style={{padding: '6px', fontSize: '12px', background: 'rgba(255,255,255,0.1)', color: 'white'}} onClick={() => deleteTemplate(t)} title="Sil">🗑️</button>
                         <button className="btn btn-primary" style={{padding: '6px 12px', fontSize: '12px'}} onClick={() => selectTemplate(t)}>Şablon A Yap</button>
                         <button className="btn" style={{padding: '6px 12px', fontSize: '12px', background: templateB === t ? 'rgba(192, 132, 252, 0.2)' : 'rgba(255,255,255,0.1)', color: templateB === t ? '#C084FC' : 'white', border: templateB === t ? '1px solid #C084FC' : '1px solid transparent'}} onClick={() => selectTemplateB(t)}>Şablon B Yap</button>
@@ -1138,6 +1216,44 @@ function App() {
                 <div style={{padding: '3rem', textAlign: 'center', color: '#666'}}>Kara liste şu an boş.</div>
               )}
             </div>
+          </div>
+        )}
+
+        {activeTab === 'manual_send' && (
+          <div className="glass-card" style={{maxWidth: '800px', margin: '0 auto', width: '100%'}}>
+            <h2 style={{marginBottom: '2rem'}}>Manuel E-Posta Gönderimi</h2>
+            <form onSubmit={sendManualEmail} style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+              <div>
+                <label style={{display: 'block', marginBottom: '8px', color: '#9AA3B5'}}>Alıcı E-posta Adresi *</label>
+                <input type="email" required value={manualSend.email} onChange={(e) => setManualSend({...manualSend, email: e.target.value})} 
+                  style={{width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '8px'}} />
+              </div>
+              
+              <div>
+                <label style={{display: 'block', marginBottom: '8px', color: '#9AA3B5'}}>Gönderilecek Şablon *</label>
+                <select value={manualSend.template} required onChange={(e) => setManualSend({...manualSend, template: e.target.value})}
+                  style={{width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '8px'}}>
+                  <option value="">-- Şablon Seçin --</option>
+                  {templates.map(t => <option key={t} value={t} style={{color: '#000'}}>{t}</option>)}
+                </select>
+              </div>
+
+              <div>
+                <label style={{display: 'block', marginBottom: '8px', color: '#9AA3B5'}}>Marka Adı (İsteğe Bağlı, şablondaki {'{{Marka}}'} yerine geçer)</label>
+                <input type="text" value={manualSend.marka} onChange={(e) => setManualSend({...manualSend, marka: e.target.value})} 
+                  style={{width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '8px'}} />
+              </div>
+
+              <div>
+                <label style={{display: 'block', marginBottom: '8px', color: '#9AA3B5'}}>Web Sitesi (İsteğe Bağlı, şablondaki {'{{Site}}'} yerine geçer)</label>
+                <input type="text" value={manualSend.site} onChange={(e) => setManualSend({...manualSend, site: e.target.value})} placeholder="Örn: altikodtech.com.tr"
+                  style={{width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '8px'}} />
+              </div>
+
+              <button type="submit" className="btn btn-primary" style={{marginTop: '1rem', padding: '12px', fontSize: '16px'}}>
+                🚀 Şimdi Gönder
+              </button>
+            </form>
           </div>
         )}
 

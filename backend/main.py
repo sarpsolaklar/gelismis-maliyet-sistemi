@@ -426,6 +426,13 @@ def rename_template(payload: dict):
         
     return {"message": "Şablon adı değiştirildi."}
 
+@app.get("/api/templates/download")
+def download_template(template: str):
+    file_location = f"../{template}"
+    if not os.path.exists(file_location):
+        raise HTTPException(status_code=404, detail="Şablon bulunamadı.")
+    return FileResponse(file_location, media_type="text/html", filename=template)
+
 class TemplateUpdatePayload(BaseModel):
     template: str
     content: str
@@ -645,6 +652,35 @@ def get_contacts():
     except Exception as e:
         log_msg(f"Kişi okuma hatası: {e}")
         return {"contacts": []}
+
+class ContactUpdateBulkPayload(BaseModel):
+    updates: list
+
+@app.post("/api/contacts/update_bulk", dependencies=[Depends(verify_token)])
+def update_contact_status_bulk(payload: ContactUpdateBulkPayload):
+    if not state["active_file"] or not os.path.exists(state["active_file"]):
+        raise HTTPException(status_code=400, detail="Aktif dosya yok.")
+    if state["is_running"]:
+        raise HTTPException(status_code=400, detail="Çalışırken durum değiştirilemez.")
+    
+    try:
+        with excel_lock:
+            df = pd.read_excel(state["active_file"])
+            df['Durum'] = df['Durum'].astype(object)
+            for upd in payload.updates:
+                idx = upd["id"]
+                st = upd["status"]
+                if 0 <= idx < len(df):
+                    df.at[idx, 'Durum'] = st
+            df.to_excel(state["active_file"], index=False)
+            
+            state["total_sent"] = len(df[df['Durum'] == 'Gönderildi'])
+            state["pending"] = len(df[(df['Durum'] != 'Gönderildi') & (df['Durum'] != 'İptal')])
+            state["total_failed"] = 0
+            
+        return {"message": "Toplu güncellendi."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 class ContactUpdatePayload(BaseModel):
     id: int
@@ -1050,6 +1086,86 @@ def start_campaign(payload: StartPayload, background_tasks: BackgroundTasks):
     state["campaign_name"] = payload.campaign_name
     background_tasks.add_task(send_emails_background, payload.batch_size, payload.wait_minutes, payload.warmup_mode, payload.template_b)
     return {"message": "Başlatıldı"}
+
+class ManualSendPayload(BaseModel):
+    email: str
+    marka: str = ""
+    site: str = ""
+    template: str
+
+@app.post("/api/send_manual", dependencies=[Depends(verify_token)])
+def send_manual(payload: ManualSendPayload):
+    config = load_config()
+    server, current_acc = get_server()
+    if not server:
+        raise HTTPException(status_code=500, detail="SMTP sunucusuna bağlanılamadı.")
+
+    template_path = os.path.join(PROJECT_ROOT, payload.template)
+    if not os.path.exists(template_path):
+        raise HTTPException(status_code=400, detail="Şablon bulunamadı.")
+        
+    with open(template_path, 'r', encoding='utf-8') as f:
+        html_icerik = f.read()
+        
+    alici_email = payload.email.strip()
+    marka = payload.marka.strip()
+    site = payload.site.strip()
+    
+    site_temiz = site.replace("https://", "").replace("http://", "").rstrip("/")
+    if not marka:
+        marka = 'Değerli'
+        
+    site_html = f'<a href="https://{site_temiz}" style="color:inherit; text-decoration:none;">{site_temiz}</a>' if site_temiz else ""
+    
+    kisisel_html = html_icerik.replace("ref={{Site}}", f"ref={site_temiz}").replace("ref={{site}}", f"ref={site_temiz}")
+    kisisel_html = kisisel_html.replace("{{Marka}}", marka).replace("{{Site}}", site_html).replace("{{E-posta}}", alici_email)
+    kisisel_html = kisisel_html.replace("{{marka}}", marka).replace("{{site}}", site_html).replace("{{email}}", alici_email)
+    
+    base_url = config.get("tracking_domain", "").rstrip("/")
+    camp_id = "manual_" + datetime.now().strftime("%Y%m%d%H%M%S")
+    
+    if base_url and base_url.startswith("http"):
+        unsub_link = f'{base_url}/api/unsubscribe?email={alici_email}'
+        track_link = f'{base_url}/api/track?email={alici_email}&camp={camp_id}'
+        kisisel_html = kisisel_html.replace("{{unsubscribe_link}}", unsub_link)
+        
+        def link_replacer(match):
+            orijinal_link = match.group(1)
+            if "unsubscribe" in orijinal_link or "track" in orijinal_link:
+                return match.group(0)
+            encoded_url = urllib.parse.quote(orijinal_link, safe='')
+            yeni_link = f'{base_url}/api/click?url={encoded_url}&email={alici_email}&camp={camp_id}'
+            return f'href="{yeni_link}"'
+
+        kisisel_html = re.sub(r'href="(https?://[^"]+)"', link_replacer, kisisel_html)
+        pixel_html = f'<img src="{track_link}" width="1" height="1" style="display:none;" />'
+        if "</body>" in kisisel_html.lower():
+            kisisel_html = re.sub(r'(?i)</body>', f'{pixel_html}</body>', kisisel_html)
+        else:
+            kisisel_html += pixel_html
+    else:
+        kisisel_html = kisisel_html.replace("{{unsubscribe_link}}", "#")
+
+    msg = MIMEMultipart()
+    msg['From'] = formataddr((current_acc["sender_name"], current_acc["sender_email"]))
+    msg['To'] = alici_email
+    msg['Subject'] = config.get("subject", "E-Posta")
+    msg['Date'] = formatdate(localtime=True)
+    domain = current_acc["sender_email"].split("@")[-1] if "@" in current_acc["sender_email"] else "altikodtech.com.tr"
+    msg['Message-ID'] = make_msgid(domain=domain)
+    msg['Reply-To'] = current_acc["sender_email"]
+    msg.attach(MIMEText(kisisel_html, 'html'))
+
+    try:
+        server.send_message(msg)
+        log_msg(f"MANUEL GÖNDERİLDİ: {alici_email}")
+        server.quit()
+        return {"message": "Başarıyla gönderildi."}
+    except Exception as e:
+        log_msg(f"MANUEL HATA: {alici_email} - {e}")
+        try: server.quit() 
+        except: pass
+        raise HTTPException(status_code=500, detail=str(e))
 
 class SchedulePayload(StartPayload):
     scheduled_time: str # Format: "YYYY-MM-DD HH:MM"
