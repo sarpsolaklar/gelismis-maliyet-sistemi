@@ -198,12 +198,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     "Sınıf Genel Yönetim Gideri Payı (₺)": clsYonetim,
                     "Sınıf AR-GE Gideri Payı (₺)": clsArge,
                     "Sınıf Finansman (Gelir/Gider) Payı (₺)": clsFinansman,
-                    "Sınıf Net Maliyeti (₺)": clsNet,
+                    "Sınıf Toplam Maliyeti (₺)": clsNet,
                     "Sınıf Toplam Satış Geliri (Ciro) (₺)": (cls.quantity || 0) * (cls.salePrice || 0),
                     "Sınıf Brüt Kârı (₺)": unitProfit * cls.quantity,
                     "Sınıf Faaliyet Kârı (₺)": unitFaaliyetKari * cls.quantity,
                     "Sınıf Net Kârı (₺)": unitNetKari * cls.quantity,
-                    "1 Adet Makine Net Maliyeti (₺)": clsUnitCost,
+                    "1 Adet Makine Toplam Maliyeti (₺)": clsUnitCost,
                     "1 Adet Satış Fiyatı (₺)": cls.salePrice || 0,
                     "1 Adet Makine Brüt Kârı (₺)": unitProfit,
                     "1 Adet Makine Faaliyet Kârı (₺)": unitFaaliyetKari,
@@ -508,7 +508,7 @@ if (currentScenarioId === 'Varsayılan') {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Net Maliyet (₺)',
+                        label: 'Toplam Maliyet (₺)',
                         data: dataCost,
                         backgroundColor: 'rgba(244, 63, 94, 0.8)',
                         borderRadius: 4
@@ -962,7 +962,7 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
         </div>
 
         <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start; margin-top: 1rem;">
-            <span style="margin-top: 4px;">Şube Net Maliyeti:</span>
+            <span style="margin-top: 4px;">Şube Toplam Maliyeti:</span>
             <div style="display: flex; flex-direction: column; align-items: flex-end;">
                 <span>${formatCurrency(netTotal)}</span>
             </div>
@@ -1187,7 +1187,7 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
                         </div>
 
                         <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start; margin-top: 1rem; margin-bottom: 2rem;">
-                            <span style="margin-top: 4px;">Sınıf Net Maliyeti:</span>
+                            <span style="margin-top: 4px;">Sınıf Toplam Maliyeti:</span>
                             <div style="display: flex; flex-direction: column; align-items: flex-end;">
                                 <span id="cls-net-${cIndex}">0 ₺</span>
                             </div>
@@ -1217,7 +1217,7 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
                       </div>
                       <div style="margin-top: 1rem; margin-bottom: 1rem; height: 1px; background: var(--border-color); opacity: 0.5;"></div>
                       <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; opacity: 0.8; line-height: 1.4;">
-                            <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, 1 adet makinenin kendi <b>Net Maliyeti</b> içerisindeki payını gösterir (Sınıf ile aynıdır).
+                            <i style="margin-right:4px;">ℹ</i>Aşağıdaki yüzdelikler, 1 adet makinenin kendi <b>Toplam Maliyeti</b> içerisindeki payını gösterir (Sınıf ile aynıdır).
                         </div>
                         <div class="result-row unit">
                           <span>1 Adet Makine Hammadde Toplamı:</span>
@@ -1630,7 +1630,7 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
             </div>
 
             <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start; margin-top: 1rem;">
-                <span style="margin-top: 4px;">Net Maliyet:</span>
+                <span style="margin-top: 4px;">Toplam Maliyet:</span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
                     <span style="display: flex; align-items: center;">${formatCurrency(netMaliyet)} ${varHtml('netMaliyet', true)}</span>
                     <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netMaliyetText})</span>
@@ -1895,7 +1895,7 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                     <span>Fabrika Finansman (Gelir/Gider) Payı:</span>
                     <span style="color: ${totalFinansman < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(totalFinansman, netMaliyet)}</span>
                 </div>
-                <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Net Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100'ü aşabilir.</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Toplam Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100'ü aşabilir.</div>
             </div>
             
             <div class="result-row total" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start;">
@@ -1907,7 +1907,7 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
             </div>
             
             <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start; margin-top: 1rem;">
-                <span style="margin-top: 4px;">Fabrika Net Maliyeti:</span>
+                <span style="margin-top: 4px;">Fabrika Toplam Maliyeti:</span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
                     <span>${formatCurrency(netMaliyet)}</span>
                     <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netMaliyetText})</span>
