@@ -885,20 +885,13 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
             <i style="margin-right:4px;">ℹ</i>Gider yüzdelikleri, Tüm Fabrikadaki <b>ilgili gider kalemine</b> oranını; kârlılık yüzdelikleri ise şubenin <b>kendi maliyetine</b> oranını gösterir.
         </div>
 
-        <div class="result-row total">
-            <span>Şube Toplam Satış Geliri (Ciro):</span>
+        <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Şube Toplam Satış Geliri (Ciro): <span class="chevron">▼</span></span>
             <div style="display: flex; flex-direction: column; align-items: flex-end;">
                 <span style="color: var(--success); font-weight: 600;">${formatCurrency(branchTotalRevenue)}</span>
             </div>
         </div>
-        
-        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Şube Brüt Kârı: <span class="chevron">▼</span></span>
-            <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                <span style="color: ${branch.branchTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit, netTotal)}</span>
-            </div>
-        </div>
-        <div class="accordion-content">
+        <div class="accordion-content active">
             <div class="result-row" style="padding-left: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
                 <span style="font-weight: 600; color: var(--danger);">Satılan Malın Maliyeti (SMM):</span>
                 <span style="font-weight: 600; color: var(--danger);">${formatCurrency(branch.branchBaseTotal + branch.branchShare + (branch.laborCost || 0) + branch.branchGUG)}</span>
@@ -927,10 +920,10 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
             </div>
         </div>
 
-        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Şube Faaliyet Kârı: <span class="chevron">▼</span></span>
+        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Şube Brüt Kârı: <span class="chevron">▼</span></span>
             <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                <span style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)), netTotal)}</span>
+                <span style="color: ${branch.branchTotalProfit >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit, netTotal)}</span>
             </div>
         </div>
         <div class="accordion-content">
@@ -948,16 +941,23 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
             </div>
         </div>
 
-        <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Şube Net Kârı: <span class="chevron">▼</span></span>
+        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Şube Faaliyet Kârı: <span class="chevron">▼</span></span>
             <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                <span style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0)) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0), netTotal)}</span>
+                <span style="color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0))) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)), netTotal)}</span>
             </div>
         </div>
-        <div class="accordion-content active">
+        <div class="accordion-content">
             <div class="result-row" style="padding-left: 1rem;">
                 <span>Şube Finansman (Gelir/Gider) Payı:</span>
                 <span style="color: ${(branch.branchFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchFinansman, window.celmakGlobals ? window.celmakGlobals.totalFinansman : 1)}</span>
+            </div>
+        </div>
+
+        <div class="result-row total" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start;">
+            <span style="margin-top: 4px;">Şube Net Kârı:</span>
+            <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                <span style="font-weight: 800; color: ${(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0)) >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(branch.branchTotalProfit - ((branch.branchPazarlama || 0) + (branch.branchYonetim || 0) + (branch.branchArge || 0)) - (branch.branchFinansman || 0), netTotal)}</span>
             </div>
         </div>
 
@@ -1110,20 +1110,13 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
                     <div class="divider"></div>
 
                     <div class="branch-results">
-                        <div class="result-row total">
-                            <span>Sınıf Toplam Satış Geliri (Ciro):</span>
+                        <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Sınıf Toplam Satış Geliri (Ciro): <span class="chevron">▼</span></span>
                             <div style="display: flex; flex-direction: column; align-items: flex-end;">
                                 <span id="cls-revenue-${cIndex}" style="color: var(--success); font-weight: 600;">0 ₺</span>
                             </div>
                         </div>
-                        
-                        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Sınıf Brüt Kârı: <span class="chevron">▼</span></span>
-                            <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                                <span id="cls-total-profit-${cIndex}">0 ₺</span>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
+                        <div class="accordion-content active">
                             <div class="result-row" style="padding-left: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
                                 <span style="font-weight: 600; color: var(--danger);">Satılan Malın Maliyeti (SMM):</span>
                                 <span id="cls-cogs-${cIndex}" style="font-weight: 600; color: var(--danger);">0 ₺</span>
@@ -1152,10 +1145,10 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
                             </div>
                         </div>
 
-                        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Sınıf Faaliyet Kârı: <span class="chevron">▼</span></span>
+                        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Sınıf Brüt Kârı: <span class="chevron">▼</span></span>
                             <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                                <span id="cls-faaliyet-kar-${cIndex}">0 ₺</span>
+                                <span id="cls-total-profit-${cIndex}">0 ₺</span>
                             </div>
                         </div>
                         <div class="accordion-content">
@@ -1173,16 +1166,23 @@ window.celmakGlobals = { globalBase, globalExpense, globalLabor, totalGUG, total
                             </div>
                         </div>
 
-                        <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Sınıf Net Kârı: <span class="chevron">▼</span></span>
+                        <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                            <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Sınıf Faaliyet Kârı: <span class="chevron">▼</span></span>
                             <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                                <span id="cls-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
+                                <span id="cls-faaliyet-kar-${cIndex}">0 ₺</span>
                             </div>
                         </div>
-                        <div class="accordion-content active">
+                        <div class="accordion-content">
                             <div class="result-row" style="padding-left: 1rem;">
                                 <span>Sınıf Finansman (Gelir/Gider) Payı:</span>
                                 <span id="cls-finansman-${cIndex}">0 ₺</span>
+                            </div>
+                        </div>
+
+                        <div class="result-row total" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start;">
+                            <span style="margin-top: 4px;">Sınıf Net Kârı:</span>
+                            <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                                <span id="cls-net-kar-${cIndex}" style="font-weight: 800;">0 ₺</span>
                             </div>
                         </div>
 
@@ -1547,31 +1547,24 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
         const brutKarText = (brutKar < 0 ? "Eksi " : "") + numberToTurkishText(Math.abs(brutKar));
 
         const html = `
-            <div class="result-row total">
-                <span style="margin-top: 4px;">Toplam Satış Geliri (Ciro):</span>
+            <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Toplam Satış Geliri (Ciro): <span class="chevron">▼</span></span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
                     <span style="color: var(--success); font-weight: 600; display: flex; align-items: center;">${formatCurrency(totalCiro)} ${varHtml('totalCiro', false)}</span>
                     <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${numberToTurkishText(totalCiro)})</span>
                 </div>
             </div>
-            
-            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Brüt Kâr: <span class="chevron">▼</span></span>
-                <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                    <span style="color: ${brutKar >= 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(brutKar, netMaliyet)} ${varHtml('brutKar', false)}</span>
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${brutKarText})</span>
-                </div>
-            </div>
-            <div class="accordion-content">
+            <div class="accordion-content active">
                 <div class="result-row" style="padding-left: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
                     <span style="font-weight: 600; color: var(--danger);">Satılan Malın Maliyeti (SMM):</span>
-                    <span style="font-weight: 600; color: var(--danger); display: flex; align-items: center;">${formatCurrency(smm)} ${varHtml('smm', true)}</span>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                        <span style="font-weight: 600; color: var(--danger); display: flex; align-items: center;">${formatCurrency(smm)} ${varHtml('smm', true)}</span>
+                    </div>
                 </div>
                 <div class="result-row" style="padding-left: 1rem;">
                     <span>Hammadde Toplamı:</span>
                     <span style="display: flex; align-items: center;">${formatWithPercent(totalHammadde, netMaliyet)} ${varHtml('totalHammadde', true)}</span>
                 </div>
-                
                 <div class="result-row accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="padding-left: 1rem; cursor: pointer;">
                     <span style="display: flex; align-items: center; gap: 8px;">Toplam İşçilik Payı: <span class="chevron">▼</span></span>
                     <span style="color: var(--warning); display: flex; align-items: center;">${formatWithPercent(totalIscilik, netMaliyet)} ${varHtml('totalIscilik', true)}</span>
@@ -1586,18 +1579,17 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                         <span style="color: var(--warning); display: flex; align-items: center;">${formatWithPercent(totalDirektIscilik, netMaliyet)} ${varHtml('totalDirektIscilik', true)}</span>
                     </div>
                 </div>
-                
                 <div class="result-row" style="padding-left: 1rem;">
                     <span>Genel Üretim Gideri Payı:</span>
                     <span style="color: var(--accent-4); display: flex; align-items: center;">${formatWithPercent(totalGUG, netMaliyet)} ${varHtml('totalGUG', true)}</span>
                 </div>
             </div>
 
-            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Faaliyet Kârı: <span class="chevron">▼</span></span>
+            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Brüt Kâr: <span class="chevron">▼</span></span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                    <span style="color: ${faaliyetKari >= 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(faaliyetKari, netMaliyet)} ${varHtml('faaliyetKari', false)}</span>
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${faaliyetKariText})</span>
+                    <span style="color: ${brutKar >= 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(brutKar, netMaliyet)} ${varHtml('brutKar', false)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${brutKarText})</span>
                 </div>
             </div>
             <div class="accordion-content">
@@ -1615,19 +1607,26 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                 </div>
             </div>
 
-            <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Net Kâr: <span class="chevron">▼</span></span>
+            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Faaliyet Kârı: <span class="chevron">▼</span></span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                    <span style="color: ${netKar >= 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(netKar, netMaliyet)} ${varHtml('netKar', false)}</span>
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netKarText})</span>
+                    <span style="color: ${faaliyetKari >= 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(faaliyetKari, netMaliyet)} ${varHtml('faaliyetKari', false)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${faaliyetKariText})</span>
                 </div>
             </div>
-            <div class="accordion-content active">
+            <div class="accordion-content">
                 <div class="result-row" style="padding-left: 1rem;">
                     <span>Finansman (Gelir/Gider) Payı:</span>
-                    <span style="color: ${totalFinansman < 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(totalFinansman, netMaliyet)} ${varHtml('totalFinansman', true)}</span>
+                    <span style="color: ${(totalFinansman || 0) < 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(totalFinansman, netMaliyet)} ${varHtml('totalFinansman', true)}</span>
                 </div>
-                <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Net Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100\'ü aşabilir.</div>
+            </div>
+
+            <div class="result-row total" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start;">
+                <span style="margin-top: 4px;">Net Kâr:</span>
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <span style="font-weight: 800; color: ${netKar >= 0 ? 'var(--success)' : 'var(--danger)'}; display: flex; align-items: center;">${formatWithPercent(netKar, netMaliyet)} ${varHtml('netKar', false)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netKarText})</span>
+                </div>
             </div>
 
             <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start; margin-top: 1rem;">
@@ -1822,27 +1821,20 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
         const brutKarText = (brutKar < 0 ? "Eksi " : "") + numberToTurkishText(Math.abs(brutKar));
 
         const html = `
-            <div class="result-row total">
-                <span style="margin-top: 4px;">Fabrika Toplam Satış Geliri (Ciro):</span>
+            <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Fabrika Toplam Satış Geliri (Ciro): <span class="chevron">▼</span></span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
                     <span style="color: var(--success); font-weight: 600;">${formatCurrency(totalCiro)}</span>
                     <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${numberToTurkishText(totalCiro)})</span>
                 </div>
             </div>
-            
-            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Fabrika Brüt Kârı: <span class="chevron">▼</span></span>
-                <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                    <span style="color: ${brutKar >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(brutKar, netMaliyet)}</span>
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${brutKarText})</span>
+            <div class="accordion-content active">
+                <div class="result-row" style="padding-left: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <span style="font-weight: 600; color: var(--danger);">Satılan Malın Maliyeti (SMM):</span>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                        <span style="font-weight: 600; color: var(--danger);">${formatCurrency(totalHammadde + totalIscilik + totalGUG)}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="accordion-content">
-
-<div class="result-row" style="padding-left: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
-    <span style="font-weight: 600; color: var(--danger);">Satılan Malın Maliyeti (SMM):</span>
-    <span style="font-weight: 600; color: var(--danger);">${formatCurrency(totalHammadde + totalIscilik + totalGUG)}</span>
-</div>
                 <div class="result-row" style="padding-left: 1rem;">
                     <span>Fabrika Hammadde Toplamı:</span>
                     <span>${formatWithPercent(totalHammadde, netMaliyet)}</span>
@@ -1862,18 +1854,18 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                         <span style="color: var(--warning);">${formatWithPercent(totalDirektIscilik, netMaliyet)}</span>
                     </div>
                 </div>
-                
+
                 <div class="result-row" style="padding-left: 1rem;">
                     <span>Fabrika Toplam Genel Üretim Gideri Payı:</span>
                     <span style="color: var(--accent-4);">${formatWithPercent(totalGUG, netMaliyet)}</span>
                 </div>
             </div>
 
-            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Fabrika Faaliyet Kârı: <span class="chevron">▼</span></span>
+            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--success); background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Fabrika Brüt Kârı: <span class="chevron">▼</span></span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                    <span style="color: ${faaliyetKari >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(faaliyetKari, netMaliyet)}</span>
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${faaliyetKariText})</span>
+                    <span style="color: ${brutKar >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(brutKar, netMaliyet)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${brutKarText})</span>
                 </div>
             </div>
             <div class="accordion-content">
@@ -1891,21 +1883,29 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
                 </div>
             </div>
 
-            <div class="result-row total accordion-header open" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
-                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Fabrika Net Kârı: <span class="chevron">▼</span></span>
+            <div class="result-row total accordion-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('active')" style="margin-top: 0.5rem; border-left-color: var(--accent-1); background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%); align-items: flex-start; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">Fabrika Faaliyet Kârı: <span class="chevron">▼</span></span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                    <span style="color: ${netKar >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(netKar, netMaliyet)}</span>
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netKarText})</span>
+                    <span style="color: ${faaliyetKari >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(faaliyetKari, netMaliyet)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${faaliyetKariText})</span>
                 </div>
             </div>
-            <div class="accordion-content active">
+            <div class="accordion-content">
                 <div class="result-row" style="padding-left: 1rem;">
                     <span>Fabrika Finansman (Gelir/Gider) Payı:</span>
                     <span style="color: ${totalFinansman < 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(totalFinansman, netMaliyet)}</span>
                 </div>
-                <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Net Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100\'ü aşabilir.</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; margin-top: 4px; padding-right: 10px; text-align: right;">ℹ Finansman kalemi Net Maliyet hesaplamasından bağımsız olduğu için oranların toplamı %100'ü aşabilir.</div>
             </div>
-
+            
+            <div class="result-row total" style="margin-top: 1rem; border-left-color: #8b5cf6; background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%); align-items: flex-start;">
+                <span style="margin-top: 4px;">Fabrika Net Kârı:</span>
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <span style="font-weight: 800; color: ${netKar >= 0 ? 'var(--success)' : 'var(--danger)'};">${formatWithPercent(netKar, netMaliyet)}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; font-weight: normal; margin-top: 2px;">(${netKarText})</span>
+                </div>
+            </div>
+            
             <div class="result-row total" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%); border-left-color: var(--accent-2); align-items: flex-start; margin-top: 1rem;">
                 <span style="margin-top: 4px;">Fabrika Net Maliyeti:</span>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
