@@ -510,7 +510,7 @@ if (currentScenarioId === 'Varsayılan') {
                     {
                         label: 'Toplam Maliyet (₺)',
                         data: dataCost,
-                        backgroundColor: 'rgba(244, 63, 94, 0.8)',
+                        backgroundColor: 'rgba(224, 0, 45, 0.9)',
                         borderRadius: 4
                     },
                     {
@@ -531,7 +531,7 @@ if (currentScenarioId === 'Varsayılan') {
                 plugins: {
                     legend: { 
                         position: 'top', 
-                        labels: { color: textColor, font: { family: 'Outfit', size: 12 } } 
+                        labels: { color: textColor, font: { family: 'Inter', size: 12 } } 
                     },
                     tooltip: {
                         callbacks: {
@@ -1915,7 +1915,31 @@ function renderCompareResults(scenarioKeys, container, branchFilter = 'ALL', bas
             </div>
         `;
 
-        document.getElementById('factorySummaryResults').innerHTML = html;
+        // Özet gösterge şeridi (yalnızca sunum; yukarıda hesaplanan değerleri kullanır)
+        const kpiMargin = totalCiro > 0 ? '%' + ((netKar / totalCiro) * 100).toFixed(1) : '—';
+        const kpiHtml = `
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-steel">
+                    <span class="kpi-label">Toplam Satış Geliri (Ciro)</span>
+                    <span class="kpi-value">${formatCurrency(totalCiro)}</span>
+                </div>
+                <div class="kpi-card kpi-ink">
+                    <span class="kpi-label">Toplam Maliyet</span>
+                    <span class="kpi-value">${formatCurrency(netMaliyet)}</span>
+                </div>
+                <div class="kpi-card ${brutKar >= 0 ? 'kpi-pos' : 'kpi-neg'}">
+                    <span class="kpi-label">Brüt Kâr</span>
+                    <span class="kpi-value">${formatCurrency(brutKar)}</span>
+                </div>
+                <div class="kpi-card kpi-brand ${netKar >= 0 ? 'kpi-pos-text' : 'kpi-neg-text'}">
+                    <span class="kpi-label">Net Kâr</span>
+                    <span class="kpi-value">${formatCurrency(netKar)}</span>
+                    <span class="kpi-sub">Net kâr marjı: ${kpiMargin}</span>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('factorySummaryResults').innerHTML = kpiHtml + html;
     }
 
 });
